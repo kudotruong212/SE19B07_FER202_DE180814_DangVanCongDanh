@@ -13,5 +13,8 @@ const result = ages.reduce(
   { total: 0, min: Infinity, max: -Infinity, buckets: { teen: 0, adult: 0 } }
 );
 
+avg = result.total / ages.length;
+console.log(`Avg: ${avg.toFixed(2)}`);
+
 console.log(`Total: ${result.total}, Min: ${result.min}, Max: ${result.max}`);
 console.log("Buckets:", result.buckets);

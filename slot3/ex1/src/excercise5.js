@@ -8,7 +8,7 @@ const people = [
 // Lọc những người tuổi từ 13-19, map sang chuỗi "Tên (tuổi)"
 const filteredPeople = people
     .filter(person => person.age >= 13 && person.age <= 19)
-    .map(person => `${person.name} (${person.age})`);
+    .map(person => `${person.name} có ${person.age} tuổi` );
 
 filteredPeople.forEach(str => console.log(str));
 // Kết quả:
