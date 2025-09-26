@@ -12,7 +12,8 @@ const companies = [
   { name: "Company Nine", category: "Retail", start: 1981, end: 1989 }
 ];
 
-
+// lọc các công ty trong lĩnh vực "Finance"
+const financeCompanies = companies.filter(company => company.category === "Finance");
 // sort
 const sortedCompanies = companies.sort((a, b) => a.start - b.start);
 
@@ -25,6 +26,14 @@ const top3 = sortedCompanies.slice(0, 3);
       <p>Kết quả form Company - EndYear</p>
       <ul>
         {top3.map((company) => (
+          <li key={company.name}>
+            {company.name} - {company.end}
+          </li>
+        ))}
+      </ul>
+      <h2>Finance Companies:</h2>
+      <ul>
+        {financeCompanies.map((company) => (
           <li key={company.name}>
             {company.name} - {company.end}
           </li>

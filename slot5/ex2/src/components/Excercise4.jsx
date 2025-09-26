@@ -14,6 +14,11 @@ function App() {
       <p>Third: {third}</p>
       <p>Rest Ages: {restAges.join(', ')}</p>
       <p>Filtered Ages (Even): {filteredAges.join(', ')}</p>
+      <ul>
+        {restAges.map((age, index) => (
+          <li key={index}>{age}</li>
+        ))}
+      </ul>
     </div>
   );
 }
