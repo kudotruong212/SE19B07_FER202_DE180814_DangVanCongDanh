@@ -1,22 +1,53 @@
-import React from 'react';
+import React from "react";
 
 export default function Carousel() {
   return (
-    <header
-      className="hero position-relative text-white d-flex align-items-center"
-      style={{
-        backgroundImage: "url('/pizza/picture1.jpg')", // ảnh nền từ public
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '400px'
-      }}
-    >
-      <div className="hero__overlay position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-
-      <div className="hero__content position-relative container text-center">
-        <h1 className="fw-bold">Neapolitan Pizza</h1>
-        <p>If you are looking for traditional Italian pizza, the Neapolitan is the best option!</p>
+    <div id="pizzaCarousel" className="carousel slide" data-bs-ride="carousel">
+      <div className="carousel-inner">
+        <div className="carousel-item active">
+          <img src="/pizza/picture1.jpg" className="d-block w-100" alt="Pizza 1" style={{ height: "400px", objectFit: "cover" }} />
+          <div className="carousel-caption d-none d-md-block">
+            <h1 className="fw-bold">Neapolitan Pizza</h1>
+            <p>If you are looking for traditional Italian pizza, the Neapolitan is the best option!</p>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="/pizza/picture6.jpg" className="d-block w-100" alt="Pizza 2" style={{ height: "400px", objectFit: "cover" }} />
+          <div className="carousel-caption d-none d-md-block">
+            <h1 className="fw-bold">Mushroom Pizza</h1>
+            <p>Delicious mushroom pizza for your taste!</p>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="/pizza/picture7.jpg" className="d-block w-100" alt="Pizza 3" style={{ height: "400px", objectFit: "cover" }} />
+          <div className="carousel-caption d-none d-md-block">
+            <h1 className="fw-bold">Hawaiian Pizza</h1>
+            <p>Try our sweet and savory Hawaiian pizza!</p>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="/pizza/picture8.jpg" className="d-block w-100" alt="Pizza 3" style={{ height: "400px", objectFit: "cover" }} />
+          <div className="carousel-caption d-none d-md-block">
+            <h1 className="fw-bold">Hawaiian Pizza</h1>
+            <p>Try our sweet and savory Hawaiian pizza!</p>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="/pizza/picture9.jpg" className="d-block w-100" alt="Pizza 3" style={{ height: "400px", objectFit: "cover" }} />
+          <div className="carousel-caption d-none d-md-block">
+            <h1 className="fw-bold">Hawaiian Pizza</h1>
+            <p>Try our sweet and savory Hawaiian pizza!</p>
+          </div>
+        </div>
       </div>
-    </header>
+      <button className="carousel-control-prev" type="button" data-bs-target="#pizzaCarousel" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" type="button" data-bs-target="#pizzaCarousel" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+    </div>
   );
 }
