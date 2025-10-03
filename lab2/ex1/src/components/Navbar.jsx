@@ -9,7 +9,7 @@ export default function Navbar() {
       </div>
 
       {/* Navbar chính */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className=" dropdown-menu navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
           <a className="navbar-brand fw-bold" href="#home">Pizza House</a>
           <button 
