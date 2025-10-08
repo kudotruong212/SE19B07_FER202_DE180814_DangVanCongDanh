@@ -32,7 +32,7 @@
     return (
       <div className="container py-5" style={{ background: "#2d2d2d" }}>
         <h2 className="text-white mb-4">Our Menu</h2>
-        <div className="row">
+        <div className="row ">
           {menu.map((item, idx) => (
             <div className="col-md-3 mb-4" key={idx}>
               <div className="card position-relative">

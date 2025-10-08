@@ -51,6 +51,10 @@ export default function BookingForm() {
                 <li><a class="dropdown-item" href="#">Separated link</a></li>
               </ul>
             </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="••••••••" autocomplete="new-password" />
+            </div>  
           </div>
           <div className="mb-3">
             <textarea
@@ -59,7 +63,7 @@ export default function BookingForm() {
               className="form-control"
             ></textarea>
           </div>
-          <button type="submit" className="btn btn-warning px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="submit" className="btn btn-warning px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal" >
             Send Message
           </button>
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,6 +73,8 @@ export default function BookingForm() {
                   <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
+
                 <div class="modal-body">
                   ...
                 </div>
