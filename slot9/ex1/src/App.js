@@ -4,7 +4,7 @@ import FooterPage from './pages/FooterPage';
 
 function App() {
   return (
-    <div>
+    <div >
       <HomePage />
       <FooterPage />
     </div>

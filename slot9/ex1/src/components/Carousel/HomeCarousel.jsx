@@ -18,7 +18,7 @@ export default function HomeCarousel() {
           <Carousel.Caption
             className="text-start"
             style={{
-              background: "rgba(0,0,0,0.35)",
+              background: "rgba(255, 254, 254, 0.42)",
               borderRadius: 12,
               padding: "0.75rem 1rem",
               maxWidth: 720
@@ -26,7 +26,7 @@ export default function HomeCarousel() {
           >
             <h3 className="mb-1">
               {m.title}{" "}
-              <Badge bg="info" className="text-dark">{m.genre}</Badge>{" "}
+              <Badge bg="info" className="text-white">{m.genre}</Badge>{" "}
               <Badge bg="secondary">{m.year}</Badge>
             </h3>
             <p className="mb-0" style={{ fontSize: "0.95rem" }}>
