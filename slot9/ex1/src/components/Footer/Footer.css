@@ -1,25 +1,26 @@
 footer {
-  background-color: #f8f9fa;
+  background-color: #212529;
   text-align: center;
   padding: 1rem 0;
   margin-top: 2rem;
-  border-top: 1px solid #ddd;
-  color: #333;
+  border-top: 1px solid #495057;
+  color: #ffffff;
   font-size: 0.95rem;
 }
 
 /* Add spacing between lines */
 footer p {
   margin: 0.25rem 0;
+  color: #ffffff;
 }
 
 /* Style the email link */
 footer a {
-  color: #007bff;
+  color: #0dcaf0;
   text-decoration: none;
 }
 
 footer a:hover {
   text-decoration: underline;
-  color: #0056b3;
+  color: #0dcaf0;
 }

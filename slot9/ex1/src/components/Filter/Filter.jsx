@@ -6,8 +6,8 @@ export default function Filter({ onFilterChange }) {
   const [yearRange, setYearRange] = useState("all");
   const [sort, setSort] = useState("");
 
-  const handleChange = () => {
-    onFilterChange({ search, yearRange, sort });
+  const handleChange = (newSearch = search, newYearRange = yearRange, newSort = sort) => {
+    onFilterChange({ search: newSearch, yearRange: newYearRange, sort: newSort });
   };
 
   return (
@@ -23,8 +23,9 @@ export default function Filter({ onFilterChange }) {
                 placeholder="Enter movie title or description..."
                 value={search}
                 onChange={(e) => {
-                  setSearch(e.target.value);
-                  handleChange();
+                  const newSearch = e.target.value;
+                  setSearch(newSearch);
+                  handleChange(newSearch, yearRange, sort);
                 }}
               />
             </Form.Group>
@@ -36,14 +37,15 @@ export default function Filter({ onFilterChange }) {
               <Form.Select
                 value={yearRange}
                 onChange={(e) => {
-                  setYearRange(e.target.value);
-                  handleChange();
+                  const newYearRange = e.target.value;
+                  setYearRange(newYearRange);
+                  handleChange(search, newYearRange, sort);
                 }}
               >
                 <option value="all">All</option>
                 <option value="<=2000">≤ 2000</option>
                 <option value="2001-2015">2001–2015</option>
-                <option value=">2015"> 2015</option>
+                <option value=">2015">> 2015</option>
               </Form.Select>
             </Form.Group>
           </Col>
@@ -54,17 +56,18 @@ export default function Filter({ onFilterChange }) {
               <Form.Select
                 value={sort}
                 onChange={(e) => {
-                  setSort(e.target.value);
-                  handleChange();
+                  const newSort = e.target.value;
+                  setSort(newSort);
+                  handleChange(search, yearRange, newSort);
                 }}
               >
                 <option value="">Default</option>
-                <option value="year-asc">Year ↑</option>
-                <option value="year-desc">Year ↓</option>
-                <option value="title-asc">Title A→Z</option>
-                <option value="title-desc">Title Z→A</option>
-                <option value="duration-asc">Duration ↑</option>
-                <option value="duration-desc">Duration ↓</option>
+                <option value="year-asc">Year (Ascending)</option>
+                <option value="year-desc">Year (Descending)</option>
+                <option value="title-asc">Title (A to Z)</option>
+                <option value="title-desc">Title (Z to A)</option>
+                <option value="duration-asc">Duration (Ascending)</option>
+                <option value="duration-desc">Duration (Descending)</option>
               </Form.Select>
             </Form.Group>
           </Col>
