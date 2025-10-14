@@ -41,7 +41,7 @@ export default function MovieCard({ items = [] }) {
       <Row xs={1} sm={2} lg={3} className="g-3">
         {items.map((m) => (
           <Col key={m.id}>
-            <Card className="h-100 shadow-sm" style={{ borderRadius: 12 }}>
+            <Card className="h-100 shadow-sm" style={{ borderRadius: 12 }} bg="dark" text="light">
               <Card.Img
                 variant="top"
                 src={m.poster}
@@ -56,16 +56,16 @@ export default function MovieCard({ items = [] }) {
                     <Badge bg="info" className="text-dark">{m.genre}</Badge>
                   </div>
                 </div>
-                <Card.Text className="text-muted" style={{ minHeight: 48 }}>
+                <Card.Text className="text-light" style={{ minHeight: 48 }}>
                   {truncate(m.description, 120)}
                 </Card.Text>
-                <div className="small text-secondary mb-2">
+                <div className="small text-light mb-2">
                   <span className="me-3"><strong>Country:</strong> {m.country}</span>
                   <span><strong>Duration:</strong> {m.duration} mins</span>
                 </div>
                 <div className="d-flex gap-2">
-                  <Button variant="primary" onClick={() => addToFav(m)}>Add to Favourites</Button>
-                  <Button variant="outline-secondary" onClick={() => openDetail(m)}>View Details</Button>
+                  <Button variant="outline-light" onClick={() => addToFav(m)}>Add to Favourites</Button>
+                  <Button variant="outline-info" onClick={() => openDetail(m)}>View Details</Button>
                 </div>
               </Card.Body>
             </Card>

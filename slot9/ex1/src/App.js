@@ -9,7 +9,7 @@ import FooterPage from './pages/FooterPage';
 function App() {
   return (
     <Router>
-      <div>
+      <div className="bg-dark text-light min-vh-100">
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />

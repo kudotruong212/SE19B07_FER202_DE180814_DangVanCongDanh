@@ -95,13 +95,13 @@ export default function AccountPage() {
   const progress = (step / 3) * 100;
 
   return (
-    <Container className="mt-4" style={{ maxWidth: 700 }}>
+    <Container className="mt-4" style={{ maxWidth: 700 }} data-bs-theme="dark">
       {/* Header with icon and title */}
       <div className="d-flex align-items-center mb-3">
         <div className="header-avatar">
           <i className="bi bi-person-fill"></i>
         </div>
-        <h4 className="m-0 fw-semibold text-dark">Build Your Profile</h4>
+        <h4 className="m-0 fw-semibold text-light">Build Your Profile</h4>
       </div>
 
       {/* Progress bar */}

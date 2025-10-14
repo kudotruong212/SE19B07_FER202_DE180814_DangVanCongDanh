@@ -69,8 +69,8 @@ export default function HomePage() {
         <Container className="mt-3">
             <HomeCarousel />
             <div className="mt-4">
-                <h4>Featured Movies Collections</h4>
-                <p className="text-secondary">Các bộ phim nổi bật (grid responsive).</p>
+                <h4 className="text-light">Featured Movies Collections</h4>
+                <p className="text-light">Các bộ phim nổi bật (grid responsive).</p>
                 <Filter onFilterChange={setFilterState} />
                 <MovieCard items={filteredMovies} />
             </div>

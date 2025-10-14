@@ -11,13 +11,13 @@ export default function Filter({ onFilterChange }) {
   };
 
   return (
-    <Card className="mb-3 shadow-sm">
+    <Card className="mb-3 shadow-sm" bg="dark" text="light" data-bs-theme="dark">
       <Card.Body>
-        <h5 className="mb-3">🎬 Movie Filter</h5>
+        <h5 className="mb-3 text-light">🎬 Movie Filter</h5>
         <Row className="g-3">
           <Col md={4}>
             <Form.Group>
-              <Form.Label>Search</Form.Label>
+              <Form.Label className="text-light">Search</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter movie title or description..."
@@ -32,7 +32,7 @@ export default function Filter({ onFilterChange }) {
 
           <Col md={4}>
             <Form.Group>
-              <Form.Label>Filter by Year</Form.Label>
+              <Form.Label className="text-light">Filter by Year</Form.Label>
               <Form.Select
                 value={yearRange}
                 onChange={(e) => {
@@ -50,7 +50,7 @@ export default function Filter({ onFilterChange }) {
 
           <Col md={4}>
             <Form.Group>
-              <Form.Label>Sorting</Form.Label>
+              <Form.Label className="text-light">Sorting</Form.Label>
               <Form.Select
                 value={sort}
                 onChange={(e) => {
