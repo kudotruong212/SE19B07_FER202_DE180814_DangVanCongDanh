@@ -45,7 +45,7 @@ export default function Filter({ onFilterChange }) {
                 <option value="all">All</option>
                 <option value="<=2000">≤ 2000</option>
                 <option value="2001-2015">2001–2015</option>
-                <option value=">2015">> 2015</option>
+                <option value=">2015">"2015 về sau</option>
               </Form.Select>
             </Form.Group>
           </Col>
