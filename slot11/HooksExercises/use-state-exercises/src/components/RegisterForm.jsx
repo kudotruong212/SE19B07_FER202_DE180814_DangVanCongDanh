@@ -11,16 +11,34 @@ const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/; // >=8, hoa, thường, số, ký tự đặc biệt
 
 export default function RegisterForm() {
+  // useState 1: Quản lý dữ liệu form đăng ký
+  // - username: Tên người dùng (≥3 ký tự, chỉ chữ/số/._)
+  // - email: Địa chỉ email người dùng
+  // - password: Mật khẩu (≥8 ký tự, có hoa/thường/số/ký tự đặc biệt)
+  // - confirmPassword: Xác nhận mật khẩu (phải khớp với password)
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
+
+  // useState 2: Theo dõi các trường đã được người dùng tương tác (focus/blur)
+  // - Chỉ hiển thị lỗi validation khi trường đã được touched
+  // - Tránh hiển thị lỗi ngay khi component mount
   const [touched, setTouched] = useState({});
+
+  // useState 3: Điều khiển hiển thị Toast thông báo thành công
+  // - true: Hiển thị toast "Submitted successfully!"
+  // - false: Ẩn toast
   const [showToast, setShowToast] = useState(false);
+
+  // useState 4: Điều khiển hiển thị Modal xác nhận đăng ký
+  // - true: Hiển thị modal với thông tin đã đăng ký
+  // - false: Ẩn modal
   const [showModal, setShowModal] = useState(false);
 
+  // Kiểm tra lỗi form
   const errors = useMemo(() => {
     const e = {};
     if (!usernameRegex.test(form.username.trim())) {
@@ -38,33 +56,44 @@ export default function RegisterForm() {
     return e;
   }, [form]);
 
+
+  // Kiểm tra form có hợp lệ không
   const isValid = useMemo(
     () => Object.keys(errors).length === 0 &&
           form.username && form.email && form.password && form.confirmPassword,
     [errors, form]
   );
 
+  // Xử lý thay đổi input
   const onChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
+  // Xử lý blur input
   const onBlur = (e) => {
     setTouched(prev => ({ ...prev, [e.target.name]: true }));
   };
 
+  // Xử lý submit form
   const onSubmit = (e) => {
     e.preventDefault();
     if (!isValid) return;
+    
+    // In username ra console sau khi hoàn thành form
+    console.log("Username đã đăng ký:", form.username);
+    
     setShowToast(true);
     setShowModal(true);
   };
 
+  // Xử lý cancel form
   const onCancel = () => {
     setForm({ username: "", email: "", password: "", confirmPassword: "" });
     setTouched({});
   };
 
+  // Render form
   return (
     <Container className="mt-5">
       <Row className="justify-content-md-center">
