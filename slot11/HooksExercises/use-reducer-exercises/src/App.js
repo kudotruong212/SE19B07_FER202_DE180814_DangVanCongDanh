@@ -6,12 +6,14 @@ import LightSwitch from './components/LightSwitch';
 import LoginForm from './components/LoginForm';
 import QuestionBank from './components/QuestionBank';
 import QuizReducer from './components/QuizReducer';
+import SignUpForm from './components/SignUpForm';
 function App() {
   return (
     <div >
      <CounterComponent />
      <LightSwitch />
-     <LoginForm />
+     <SignUpForm />
+     <LoginForm />  
      <QuestionBank />
      <QuizReducer />
     </div>
