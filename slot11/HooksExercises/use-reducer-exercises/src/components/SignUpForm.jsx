@@ -1,5 +1,7 @@
-import React, { useReducer, useMemo } from 'react';
-import { Form, Button, Card, Container, Row, Col, Modal, Toast } from 'react-bootstrap';
+import React, { useReducer, useMemo, useRef } from 'react';
+import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import ConfirmModalComponent from './ConfirmModalComponent';
+import { useToast } from './ToastComponent';
 
 // Regex helpers
 const isEmail = (v) => /\S+@\S+\.[A-Za-z]{2,}/.test(v);
@@ -36,6 +38,7 @@ const validate = (field, value, currentForm) => {
       return '';
   }
 };
+// ...existing code...
 
 const initialState = {
   form: {
@@ -45,40 +48,51 @@ const initialState = {
     confirm: '',
   },
   errors: {},
-  showModal: false,
-  showToast: false,
 };
 
+// Reducer function để quản lý state của form đăng ký
+// Nhận vào state hiện tại và action, trả về state mới
 function reducer(state, action) {
   switch (action.type) {
+    // Xử lý khi người dùng thay đổi giá trị trong form
     case 'change': {
-      const { name, value } = action;
+      const { name, value } = action; // Lấy tên field và giá trị mới
+      
+      // Tạo object form mới với giá trị được cập nhật
       const nextForm = { ...state.form, [name]: value };
+      
+      // Validate field vừa thay đổi và lưu lỗi (nếu có)
       const fieldError = validate(name, value, nextForm);
       const nextErrors = { ...state.errors, [name]: fieldError };
-      // Keep confirm error in sync when password changes
+      
+      // Đặc biệt xử lý cho trường hợp password thay đổi:
+      // Nếu password thay đổi và confirm password đã có giá trị,
+      // thì cần validate lại confirm password để đảm bảo chúng khớp nhau
       if (name === 'password' && nextForm.confirm) {
         nextErrors.confirm = validate('confirm', nextForm.confirm, nextForm);
       }
+      
+      // Trả về state mới với form và errors đã được cập nhật
       return { ...state, form: nextForm, errors: nextErrors };
     }
+    
+    // Xử lý khi cần set lại toàn bộ errors (ít khi dùng)
     case 'setErrors':
       return { ...state, errors: action.errors || {} };
-    case 'submit': {
-      const newErrors = {};
-      Object.keys(state.form).forEach((field) => {
-        const err = validate(field, state.form[field], state.form);
-        if (err) newErrors[field] = err;
-      });
-      if (Object.keys(newErrors).length === 0) {
-        return { ...state, errors: {}, showModal: true, showToast: true };
-      }
-      return { ...state, errors: newErrors };
-    }
+    
+    // giữ reducer submit để không tự show modal nữa — validation sẽ xử lý ở component
+    case 'submit':
+      return { ...state };
+
+    // Xử lý khi người dùng hủy form (reset về trạng thái ban đầu)
     case 'cancel':
       return { ...initialState };
-    case 'hideToast':
-      return { ...state, showToast: false };
+    
+    // Trường hợp khi thao tác submit thành công: reset form
+    case 'submittedSuccess':
+      return { ...state, form: initialState.form, errors: {} };
+    
+    // Trường hợp mặc định: trả về state hiện tại không thay đổi
     default:
       return state;
   }
@@ -86,6 +100,9 @@ function reducer(state, action) {
 
 function SignUpForm() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const confirmRef = useRef();
+  const pendingActionRef = useRef();
+  const { showToast } = useToast();
 
   // Derive form validity from current form values
   const formErrors = useMemo(() => {
@@ -99,6 +116,41 @@ function SignUpForm() {
 
   const isValid = Object.keys(formErrors).length === 0;
 
+  // Replace form submit to open ConfirmModalComponent
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // validate all fields
+    const newErrors = {};
+    Object.keys(state.form).forEach((field) => {
+      const err = validate(field, state.form[field], state.form);
+      if (err) newErrors[field] = err;
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      dispatch({ type: 'setErrors', errors: newErrors });
+      return;
+    }
+
+    // define actual async action to run when user confirms
+    pendingActionRef.current = async () => {
+      // simulate API call (replace with real request)
+      await new Promise((r) => setTimeout(r, 1000));
+      // on success reset form and show toast
+      dispatch({ type: 'submittedSuccess' });
+      showToast('Đăng ký thành công! Chào mừng bạn đến với hệ thống.', 'success', 3000);
+    };
+
+    // open confirm modal
+    confirmRef.current?.showConfirm({
+      title: 'Xác nhận đăng ký',
+      message: `Bạn có muốn đăng ký với email ${state.form.email}?`,
+      confirmText: 'Đăng ký',
+      cancelText: 'Hủy',
+      variant: 'primary'
+    });
+  };
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-md-center">
@@ -108,12 +160,7 @@ function SignUpForm() {
               <h3 className="text-center">Sign Up</h3>
             </Card.Header>
             <Card.Body>
-              <Form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  dispatch({ type: 'submit' });
-                }}
-              >
+              <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="username" className="mb-3">
                   <Form.Label>Username</Form.Label>
                   <Form.Control
@@ -212,46 +259,22 @@ function SignUpForm() {
           </Card>
         </Col>
       </Row>
-      <Toast
-        show={state.showToast}
-        onClose={() => dispatch({ type: 'hideToast' })}
-        delay={2000}
-        autohide
-        style={{
-          position: 'fixed',
-          top: 20,
-          right: 20,
-          minWidth: 220,
-          zIndex: 9999,
+
+      {/* Confirm modal: will call pendingActionRef.current when confirmed */}
+      <ConfirmModalComponent
+        ref={confirmRef}
+        onConfirm={async () => {
+          if (pendingActionRef.current) {
+            await pendingActionRef.current();
+            pendingActionRef.current = null;
+          }
         }}
-      >
-        <Toast.Header>
-          <strong className="me-auto text-success">Success</strong>
-        </Toast.Header>
-        <Toast.Body>Submitted successfully!</Toast.Body>
-      </Toast>
-      <Modal show={state.showModal} onHide={() => dispatch({ type: 'cancel' })} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Sign Up Info</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Card>
-            <Card.Body>
-              <p><strong>Username:</strong> {state.form.username}</p>
-              <p><strong>Email:</strong> {state.form.email}</p>
-              <p><strong>Password:</strong> {state.form.password}</p>
-            </Card.Body>
-          </Card>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => dispatch({ type: 'cancel' })}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        onCancel={() => {
+          pendingActionRef.current = null;
+        }}
+      />
     </Container>
   );
 }
 
 export default SignUpForm;
-

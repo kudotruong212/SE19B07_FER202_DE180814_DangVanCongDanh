@@ -1,6 +1,7 @@
 //CounterComponent.jsx is a functional component that uses the useReducer hook to manage a counter state.
 import React, { useReducer } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
+import { useTheme } from '../contexts/ThemeContext'; // Import custom hook useTheme
 
 // 1. Khởi tạo trạng thái ban đầu
 const initialState = { count: 0 };
@@ -26,7 +27,9 @@ function CounterComponent() {
   const increment = () => dispatch({ type: 'increment' });
   const decrement = () => dispatch({ type: 'decrement' });
   const reset = () => dispatch({ type: 'reset' });
-   
+   //Sử dụng ThemeContext
+   const { theme, toggleTheme } = useTheme(); //Lấy giá trị theme từ context
+
     // Style chung cho các button
     const buttonStyle = {
         margin: '5px',
@@ -38,10 +41,22 @@ function CounterComponent() {
         fontSize: '16px'
     };
      return (
-           <div style={{ padding: '20px', border: '1px solid #ccc' }}>
+          <div style={{ padding: '20px', border: '1px solid #ccc' }}>
           <h2>Bộ Đếm Đa Năng</h2>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>Giá trị hiện tại: {state.count}</p>
-          
+          {/*Sử dụng ThemeContext*/}
+       <Button 
+        style={{
+        ...buttonStyle,
+        background: theme === 'light' ? '#6c757d' : '#f8f9fa',
+        color: theme === 'light' ? '#ffffff' : '#000000'
+
+      }}
+                  onClick={toggleTheme}
+                 
+                >
+          {theme === 'light' ? 'Dark' : 'Light'}
+          </Button>
           <Button
             onClick={increment}
        

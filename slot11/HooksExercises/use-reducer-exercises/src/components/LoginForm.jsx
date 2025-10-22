@@ -1,11 +1,12 @@
-import React, { useReducer } from 'react';
-import { Form, Button, Card, Container, Row, Col, Modal } from 'react-bootstrap';
+import React, { useReducer, useRef } from 'react';
+import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import ConfirmModalComponent from './ConfirmModalComponent';
+import { useToast } from './ToastComponent';
 
 const initial = {
   username: '',
   password: '',
   errors: {},
-  show: false,
 };
 
 function reducer(state, action) {
@@ -16,10 +17,8 @@ function reducer(state, action) {
     }
     case 'setErrors':
       return { ...state, errors: action.errors || {} };
-    case 'open':
-      return { ...state, show: true };
-    case 'close':
-      return { ...initial }; // reset toàn bộ form khi đóng
+    case 'reset':
+      return { ...initial }; // reset toàn bộ form
     default:
       return state;
   }
@@ -27,6 +26,9 @@ function reducer(state, action) {
 
 export default function LoginForm({ onSubmit }) {
   const [state, dispatch] = useReducer(reducer, initial);
+  const confirmRef = useRef();
+  const pendingActionRef = useRef();
+  const { showToast } = useToast();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,11 +39,31 @@ export default function LoginForm({ onSubmit }) {
     dispatch({ type: 'setErrors', errors: errs });
 
     if (Object.keys(errs).length === 0) {
-      // Optional: callback ra ngoài
-      if (typeof onSubmit === 'function') {
-        onSubmit({ username: state.username, password: state.password });
-      }
-      dispatch({ type: 'open' });
+      // Define the action to execute when user confirms
+      pendingActionRef.current = async () => {
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        
+        // Call external callback if provided
+        if (typeof onSubmit === 'function') {
+          onSubmit({ username: state.username, password: state.password });
+        }
+        
+        // Show success toast
+        showToast(`Chào mừng ${state.username}! Đăng nhập thành công.`, 'success', 3000);
+        
+        // Reset form after successful login
+        dispatch({ type: 'reset' });
+      };
+
+      // Show confirmation modal
+      confirmRef.current?.showConfirm({
+        title: 'Xác nhận đăng nhập',
+        message: `Bạn có muốn đăng nhập với tài khoản "${state.username}"?`,
+        confirmText: 'Đăng nhập',
+        cancelText: 'Hủy',
+        variant: 'success'
+      });
     }
   };
 
@@ -106,20 +128,19 @@ export default function LoginForm({ onSubmit }) {
         </Col>
       </Row>
 
-      {/* Modal hiển thị khi đăng nhập thành công */}
-      <Modal show={state.show} onHide={() => dispatch({ type: 'close' })} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Login Successful</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Welcome, {state.username}!</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => dispatch({ type: 'close' })}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* Confirm Modal Component */}
+      <ConfirmModalComponent
+        ref={confirmRef}
+        onConfirm={async () => {
+          if (pendingActionRef.current) {
+            await pendingActionRef.current();
+            pendingActionRef.current = null;
+          }
+        }}
+        onCancel={() => {
+          pendingActionRef.current = null;
+        }}
+      />
     </Container>
   );
 }
