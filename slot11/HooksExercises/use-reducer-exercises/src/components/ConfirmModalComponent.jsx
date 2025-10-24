@@ -65,3 +65,4 @@ const ConfirmModalComponent = forwardRef((props, ref) => {
 ConfirmModalComponent.displayName = 'ConfirmModalComponent';
 
 export default ConfirmModalComponent;
+
