@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { MovieProvider } from './contexts/MovieContext';
 import Header from './components/Header';
 import MovieManager from './pages/MovieManager';
+import MovieDetail from './pages/MovieDetail';
 import Login from './pages/Login';
 
 function PrivateRoute({ children }) {
@@ -25,6 +26,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <MovieManager />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/movie/:id"
+              element={
+                <PrivateRoute>
+                  <MovieDetail />
                 </PrivateRoute>
               }
             />

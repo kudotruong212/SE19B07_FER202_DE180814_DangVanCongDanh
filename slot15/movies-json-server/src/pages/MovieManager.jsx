@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Button, Tabs, Tab } from 'react-bootstrap';
 import { useMovies } from '../contexts/MovieContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -13,9 +14,14 @@ const MovieManager = () => {
   const [showForm, setShowForm] = useState(false);
   const [viewMode, setViewMode] = useState('list');
   const [filter, setFilter] = useState({});
+  const navigate = useNavigate();
 
   // Chỉ cho admin được CRUD (username === 'admin')
   const isAdmin = user && user.username === 'admin';
+
+  const handleViewDetails = (id) => {
+    navigate(`/movie/${id}`);
+  };
 
   const handleEdit = (movie) => {
     setCurrentMovie(movie);
@@ -104,6 +110,7 @@ const MovieManager = () => {
           <MovieList
             onEdit={isAdmin ? handleEdit : undefined}
             onDelete={isAdmin ? handleDelete : undefined}
+            onView={handleViewDetails}
             movies={filteredMovies}
           />
         </Tab>
@@ -111,6 +118,7 @@ const MovieManager = () => {
           <MovieTable
             onEdit={isAdmin ? handleEdit : undefined}
             onDelete={isAdmin ? handleDelete : undefined}
+            onView={handleViewDetails}
             movies={filteredMovies}
           />
         </Tab>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Button, Badge } from 'react-bootstrap';
 import { useMovies } from '../contexts/MovieContext';
 
-const MovieTable = ({ onEdit, onDelete, movies: propMovies }) => {
+const MovieTable = ({ onEdit, onDelete, onView, movies: propMovies }) => {
   const { movies: contextMovies, genres, loading, error } = useMovies();
   const movies = propMovies || contextMovies;
 
@@ -54,6 +54,15 @@ const MovieTable = ({ onEdit, onDelete, movies: propMovies }) => {
             <td>{movie.duration}</td>
             <td>
               <div className="d-flex gap-2">
+                {onView && (
+                  <Button 
+                    variant="info" 
+                    size="sm"
+                    onClick={() => onView(movie.id)}
+                  >
+                    Details
+                  </Button>
+                )}
                 {onEdit && (
                   <Button 
                     variant="warning" 

@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "nam123",
+      "password": "123456",
+      "fullName": "Nguyễn Văn Nam"
+    },
+    {
+      "id": "2",
+      "username": "hainguyen",
+      "password": "123456",
+      "fullName": "Nguyễn Hải"
+    }
+  ],
+  "payments": [
+    {
+      "id": "1",
+      "userId": "1",
+      "semester": "Fall 2025",
+      "courseName": "Web Development",
+      "amount": 3500000,
+      "date": "2025-09-25"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "semester": "Fall 2025",
+      "courseName": "Database Systems",
+      "amount": 4000000,
+      "date": "2025-10-05"
+    },
+    {
+      "id": "3",
+      "userId": "2",
+      "semester": "Fall 2025",
+      "courseName": "Mobile Programming",
+      "amount": 4200000,
+      "date": "2025-10-10"
+    },
+    {
+      "id": "4",
+      "userId": "1",
+      "semester": "Spring 2025",
+      "courseName": "Data Structures",
+      "amount": 3800000,
+      "date": "2025-02-15"
+    },
+    {
+      "id": "5",
+      "userId": "1",
+      "semester": "Spring 2025",
+      "courseName": "Algorithms",
+      "amount": 4500000,
+      "date": "2025-03-20"
+    },
+    {
+      "id": "6",
+      "userId": "1",
+      "semester": "Summer 2025",
+      "courseName": "Machine Learning",
+      "amount": 5000000,
+      "date": "2025-06-10"
+    },
+    {
+      "id": "7",
+      "userId": "2",
+      "semester": "Spring 2025",
+      "courseName": "Web Development",
+      "amount": 3600000,
+      "date": "2025-02-28"
+    },
+    {
+      "id": "8",
+      "userId": "2",
+      "semester": "Spring 2025",
+      "courseName": "Database Systems",
+      "amount": 4100000,
+      "date": "2025-03-15"
+    },
+    {
+      "id": "9",
+      "userId": "2",
+      "semester": "Summer 2025",
+      "courseName": "Cloud Computing",
+      "amount": 4800000,
+      "date": "2025-07-05"
+    },
+    {
+      "id": "10",
+      "userId": "1",
+      "semester": "Fall 2025",
+      "courseName": "Mobile Programming",
+      "amount": 4300000,
+      "date": "2025-11-01"
+    },
+    {
+      "id": "11",
+      "userId": "2",
+      "semester": "Fall 2025",
+      "courseName": "Web Development",
+      "amount": 3700000,
+      "date": "2025-09-30"
+    },
+    {
+      "id": "12",
+      "userId": "1",
+      "semester": "Summer 2025",
+      "courseName": "Cloud Computing",
+      "amount": 4900000,
+      "date": "2025-08-20"
+    }
+  ]
+}
