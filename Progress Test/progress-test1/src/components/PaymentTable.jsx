@@ -85,78 +85,85 @@ const PaymentTable = () => {
 
     return (
         <>
-            <Card className="mb-4 shadow-sm">
-                <Card.Header as="h5" className="d-flex justify-content-between align-items-center">
-                    <span>Danh sách Thanh toán</span>
-                    <Badge bg="success" className="fs-6">
+            <Card className="mb-4 shadow-lg border-0">
+                <Card.Header as="h5" className="d-flex justify-content-between align-items-center bg-primary text-white">
+                    <span className="fw-bold">Danh Sách Thanh Toán</span>
+                    <Badge bg="success" className="fs-6 px-3 py-2">
                         Tổng: {formatCurrency(totalAmount)}
                     </Badge>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className="p-0">
                     {payments.length === 0 ? (
-                        <Alert variant="info" className="mb-0">
+                        <Alert variant="info" className="mb-0 m-3">
                             Không có dữ liệu thanh toán nào.
                         </Alert>
                     ) : (
-                        <Table striped bordered hover responsive>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Semester</th>
-                                    <th>Course</th>
-                                    <th>Amount</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {payments.map((payment, index) => (
-                                    <tr key={payment.id}>
-                                        <td>{index + 1}</td>
-                                        <td>
-                                            <Badge bg="primary">{payment.semester}</Badge>
-                                        </td>
-                                        <td>{payment.courseName}</td>
-                                        <td className="text-end fw-bold text-success">
-                                            {formatCurrency(payment.amount)}
-                                        </td>
-                                        <td>
-                                            <ButtonGroup size="sm">
-                                                <Button
-                                                    variant="info"
-                                                    onClick={() => handleViewDetails(payment)}
-                                                    title="View Details"
-                                                >
-                                                    <FaEye />
-                                                </Button>
-                                                <Button
-                                                    variant="warning"
-                                                    onClick={() => handleEdit(payment)}
-                                                    title="Edit"
-                                                >
-                                                    <FaPencilAlt />
-                                                </Button>
-                                                <Button
-                                                    variant="danger"
-                                                    onClick={() => handleDeleteClick(payment)}
-                                                    title="Delete"
-                                                >
-                                                    <FaTrashAlt />
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
+                        <div className="table-responsive">
+                            <Table striped bordered hover className="mb-0 align-middle">
+                                <thead className="table-dark">
+                                    <tr>
+                                        <th className="text-center" style={{ width: '60px' }}>#</th>
+                                        <th>Semester</th>
+                                        <th>Course</th>
+                                        <th className="text-end">Amount</th>
+                                        <th className="text-center" style={{ width: '280px' }}>Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                            <tfoot>
-                                <tr className="table-info">
-                                    <td colSpan="3" className="text-end fw-bold">Total Amount:</td>
-                                    <td className="text-end fw-bold text-success fs-5">
-                                        {formatCurrency(totalAmount)}
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </Table>
+                                </thead>
+                                <tbody>
+                                    {payments.map((payment, index) => (
+                                        <tr key={payment.id}>
+                                            <td className="text-center fw-bold">{index + 1}</td>
+                                            <td>
+                                                <Badge bg="primary" className="px-3 py-2">
+                                                    {payment.semester}
+                                                </Badge>
+                                            </td>
+                                            <td className="fw-semibold">{payment.courseName}</td>
+                                            <td className="text-end fw-bold text-success fs-6">
+                                                {formatCurrency(payment.amount)}
+                                            </td>
+                                            <td>
+                                                <div className="d-flex gap-2 justify-content-center">
+                                                    <Button
+                                                        variant="info"
+                                                        size="sm"
+                                                        onClick={() => handleViewDetails(payment)}
+                                                        className="d-flex align-items-center gap-1"
+                                                    >
+                                                        <FaEye /> View
+                                                    </Button>
+                                                    <Button
+                                                        variant="warning"
+                                                        size="sm"
+                                                        onClick={() => handleEdit(payment)}
+                                                        className="d-flex align-items-center gap-1"
+                                                    >
+                                                        <FaPencilAlt /> Edit
+                                                    </Button>
+                                                    <Button
+                                                        variant="danger"
+                                                        size="sm"
+                                                        onClick={() => handleDeleteClick(payment)}
+                                                        className="d-flex align-items-center gap-1"
+                                                    >
+                                                        <FaTrashAlt /> Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <tfoot>
+                                    <tr className="table-info">
+                                        <td colSpan="3" className="text-end fw-bold fs-5">Total Amount:</td>
+                                        <td className="text-end fw-bold text-success fs-4">
+                                            {formatCurrency(totalAmount)}
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </Table>
+                        </div>
                     )}
                 </Card.Body>
             </Card>
