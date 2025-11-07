@@ -1,14 +1,106 @@
 {
-    "accounts": [
+  "users": [
     {
-      "id": 1,
-      "username": "admin",
-      "password": "admin123"
+      "id": "1",
+      "username": "nam123",
+      "password": "123456",
+      "fullName": "Nguyễn Văn Nam"
     },
     {
-      "id": 2,
-      "username": "user",
-      "password": "user123"
+      "id": "2",
+      "username": "hainguyen",
+      "password": "123456",
+      "fullName": "Nguyễn Hải"
+    }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "userId": "1",
+      "category": "Category 1",
+      "name": "Item 1",
+      "year": 2020,
+      "price": 1000000,
+      "priceUSD": 100,
+      "stock": 5,
+      "date": "2025-01-15",
+      "image": "https://via.placeholder.com/300x200/667eea/ffffff?text=Item1"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "category": "Category 1",
+      "name": "Item 2",
+      "year": 2021,
+      "price": 2000000,
+      "priceUSD": 200,
+      "stock": 8,
+      "date": "2025-02-20",
+      "image": "https://via.placeholder.com/300x200/f56565/ffffff?text=Item2"
+    },
+    {
+      "id": "3",
+      "userId": "2",
+      "category": "Category 2",
+      "name": "Item 3",
+      "year": 2022,
+      "price": 3000000,
+      "priceUSD": 300,
+      "stock": 10,
+      "date": "2025-03-25",
+      "image": "https://via.placeholder.com/300x200/48bb78/ffffff?text=Item3"
+    },
+    {
+      "id": "4",
+      "userId": "1",
+      "category": "Category 2",
+      "name": "Item 4",
+      "year": 2023,
+      "price": 4000000,
+      "priceUSD": 400,
+      "stock": 12,
+      "date": "2025-04-10",
+      "image": "https://via.placeholder.com/300x200/ed8936/ffffff?text=Item4"
+    },
+    {
+      "id": "5",
+      "userId": "1",
+      "category": "Category 3",
+      "name": "Item 5",
+      "year": 2024,
+      "price": 5000000,
+      "stock": 3,
+      "date": "2025-05-15"
+    },
+    {
+      "id": "6",
+      "userId": "1",
+      "category": "Category 1",
+      "name": "Item 6",
+      "year": 2023,
+      "price": 6000000,
+      "stock": 7,
+      "date": "2025-06-20"
+    },
+    {
+      "id": "7",
+      "userId": "2",
+      "category": "Category 3",
+      "name": "Item 7",
+      "year": 2022,
+      "price": 7000000,
+      "stock": 15,
+      "date": "2025-07-25"
+    },
+    {
+      "id": "8",
+      "userId": "2",
+      "category": "Category 2",
+      "name": "Item 8",
+      "year": 2021,
+      "price": 8000000,
+      "stock": 4,
+      "date": "2025-08-30"
     }
   ]
 }

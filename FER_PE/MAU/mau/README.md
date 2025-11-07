@@ -1,70 +1,186 @@
-# Getting Started with Create React App
+# Template Code Structure - Mẫu Tổ Chức Code
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Template này được tạo ra dựa trên cấu trúc code của `progress-test1`, được tổng quát hóa để dễ dàng thay đổi object từ "Payment" sang "Item" hoặc bất kỳ object nào khác.
 
-## Available Scripts
+## 📁 Cấu Trúc Thư Mục
 
-In the project directory, you can run:
+```
+src/
+├── components/          # Các component tái sử dụng
+│   ├── AddItemForm.jsx
+│   ├── ConfirmModal.jsx
+│   ├── EditItemModal.jsx
+│   ├── FilterBar.jsx
+│   ├── ItemTable.jsx
+│   ├── LoginForm.jsx
+│   ├── NavigationHeader.jsx
+│   └── ViewDetailsModal.jsx
+├── contexts/           # Context API cho state management
+│   ├── AuthContext.jsx
+│   └── ItemContext.jsx
+├── pages/             # Các trang chính
+│   ├── AddItemPage.jsx
+│   ├── DashboardPage.jsx
+│   └── LoginPage.jsx
+├── routes/            # Cấu hình routing
+│   └── AppRoutes.js
+├── services/          # API calls
+│   └── api.js
+├── hooks/            # Custom hooks (nếu cần)
+├── utils/            # Utility functions (nếu cần)
+└── App.js            # Root component
+```
 
-### `npm start`
+## 🎯 Các Pattern Được Sử Dụng
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. Context API + useReducer Pattern
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**ItemContext.jsx** sử dụng pattern:
+- `createContext()` - Tạo context
+- `useReducer()` - Quản lý state phức tạp
+- Custom hook `useItem()` - Dễ dàng sử dụng trong components
 
-### `npm test`
+**Lợi ích:**
+- State management tập trung
+- Dễ dàng debug với reducer
+- Tách biệt logic khỏi UI
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Routing Pattern
 
-### `npm run build`
+**AppRoutes.js** sử dụng:
+- React Router v6
+- Protected Routes với `PrivateRoute` component
+- Nested routing nếu cần
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Các routes:**
+- `/` - Redirect đến `/home`
+- `/login` - Trang đăng nhập (public)
+- `/home` - Dashboard (protected)
+- `/items/add` - Thêm item mới (protected)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. API Layer Pattern
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**api.js** sử dụng:
+- Axios instance với baseURL
+- Tách biệt API calls khỏi components
+- Error handling tập trung
 
-### `npm run eject`
+**Các functions:**
+- `getItems()` - Lấy danh sách
+- `addItem(item)` - Thêm mới
+- `updateItem(id, item)` - Cập nhật
+- `deleteItem(id)` - Xóa
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4. Component Pattern
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Các loại component:**
+- **Page Components**: DashboardPage, AddItemPage
+- **Form Components**: AddItemForm, EditItemModal
+- **Table Components**: ItemTable
+- **Modal Components**: ViewDetailsModal, ConfirmModal
+- **Layout Components**: NavigationHeader
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 5. Form Validation Pattern
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**AddItemForm.jsx** và **EditItemModal.jsx**:
+- Real-time validation
+- Error messages rõ ràng
+- Disable submit khi đang loading
 
-## Learn More
+## 🔄 Cách Thay Đổi Object
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Xem file **CONFIG.md** để biết chi tiết cách thay đổi từ "Item" sang object khác.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Quick Guide:
 
-### Code Splitting
+1. **Đổi tên files**: `Item*` → `Product*` (ví dụ)
+2. **Thay đổi trong code**: `Item` → `Product`, `item` → `product`, `items` → `products`
+3. **Cập nhật fields**: Thay `category`, `name`, `price` theo object mới
+4. **Cập nhật API endpoints**: `/items` → `/products`
+5. **Cập nhật db.json**: Key `items` → `products`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🚀 Cách Chạy
 
-### Analyzing the Bundle Size
+### 1. Cài đặt dependencies:
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. Chạy JSON Server (API):
+```bash
+npm run api
+```
 
-### Making a Progressive Web App
+### 3. Chạy React App:
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📝 Dữ Liệu Mẫu
 
-### Advanced Configuration
+File `db.json` chứa:
+- **users**: Danh sách người dùng để đăng nhập
+- **items**: Danh sách items mẫu
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Đăng nhập:
+- Username: `nam123` / Password: `123456`
+- Username: `hainguyen` / Password: `123456`
 
-### Deployment
+## 🎨 Tính Năng
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- ✅ CRUD đầy đủ (Create, Read, Update, Delete)
+- ✅ Authentication với Context API
+- ✅ Protected Routes
+- ✅ Filtering & Sorting
+- ✅ Form Validation
+- ✅ Modal Components
+- ✅ Responsive Design với Bootstrap
 
-### `npm run build` fails to minify
+## 📚 Các Concepts Được Áp Dụng
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Context API**: Quản lý global state
+2. **useReducer**: Quản lý state phức tạp
+3. **React Router**: Navigation và routing
+4. **Axios**: HTTP client
+5. **Bootstrap**: UI framework
+6. **Custom Hooks**: Tái sử dụng logic
+7. **Form Validation**: Client-side validation
+8. **Error Handling**: Xử lý lỗi tập trung
+
+## 🔍 File Quan Trọng
+
+- **ItemContext.jsx**: State management chính
+- **api.js**: Tất cả API calls
+- **AppRoutes.js**: Cấu hình routing
+- **ItemTable.jsx**: Component hiển thị danh sách
+- **AddItemForm.jsx**: Form thêm mới
+- **CONFIG.md**: Hướng dẫn thay đổi object
+
+## 💡 Best Practices
+
+1. **Tách biệt concerns**: Logic, UI, API tách riêng
+2. **Reusable components**: Tái sử dụng components
+3. **Error handling**: Xử lý lỗi ở mọi nơi
+4. **Loading states**: Hiển thị loading khi cần
+5. **Validation**: Validate input trước khi submit
+6. **Comments**: Comment rõ ràng cho code phức tạp
+
+## 🛠️ Công Nghệ Sử Dụng
+
+- React 19
+- React Router 6
+- Axios
+- Bootstrap 5
+- React Bootstrap
+- JSON Server
+
+## 📖 Tài Liệu Tham Khảo
+
+- [React Context API](https://react.dev/reference/react/useContext)
+- [React Router](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [Bootstrap](https://getbootstrap.com/)
+
+---
+
+**Lưu ý**: Template này được thiết kế để dễ dàng customize và mở rộng. Hãy đọc kỹ CONFIG.md để biết cách thay đổi object một cách hiệu quả.

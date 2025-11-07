@@ -1,0 +1,74 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Administrator"
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "password": "123456",
+      "fullName": "User One"
+    },
+    {
+      "id": "3",
+      "username": "test@example.com",
+      "email": "test@example.com",
+      "password": "123456",
+      "fullName": "Test User"
+    }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "userId": "1",
+      "name": "Laptop",
+      "category": "Electronics",
+      "price": 15000000,
+      "date": "2025-01-15"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "name": "Mouse",
+      "category": "Electronics",
+      "price": 500000,
+      "date": "2025-01-20"
+    },
+    {
+      "id": "3",
+      "userId": "2",
+      "name": "Keyboard",
+      "category": "Electronics",
+      "price": 800000,
+      "date": "2025-02-01"
+    },
+    {
+      "id": "4",
+      "userId": "1",
+      "name": "Monitor",
+      "category": "Electronics",
+      "price": 5000000,
+      "date": "2025-02-10"
+    },
+    {
+      "id": "5",
+      "userId": "2",
+      "name": "Desk",
+      "category": "Furniture",
+      "price": 2000000,
+      "date": "2025-02-15"
+    },
+    {
+      "id": "6",
+      "userId": "1",
+      "name": "Chair",
+      "category": "Furniture",
+      "price": 1500000,
+      "date": "2025-02-20"
+    }
+  ]
+}
+
