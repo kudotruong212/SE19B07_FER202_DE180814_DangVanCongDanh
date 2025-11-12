@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Table, Card, Spinner, Alert, Badge, Button } from 'react-bootstrap';
-import { FaEye, FaBan, FaUnlock } from 'react-icons/fa';
+import { FaEye, FaBan, FaUnlock, FaUserShield, FaUser } from 'react-icons/fa';
 import ViewUserDetailsModal from './ViewUserDetailsModal';
 import ConfirmModal from './ConfirmModal';
 
-const UserTable = ({ users, isLoading, error, onBanUser, onUnbanUser, currentUser }) => {
+const UserTable = ({ users, isLoading, error, onBanUser, onUnbanUser, onToggleAdminStatus, currentUser }) => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [showViewModal, setShowViewModal] = useState(false);
     const [showBanModal, setShowBanModal] = useState(false);
@@ -136,27 +136,42 @@ const UserTable = ({ users, isLoading, error, onBanUser, onUnbanUser, currentUse
                                                         <FaEye /> View Details
                                                     </Button>
                                                     {!isCurrentUser(user.id) && (
-                                                        isBanned(user.status) ? (
-                                                            <Button
-                                                                variant="success"
-                                                                size="sm"
-                                                                onClick={() => handleUnbanClick(user)}
-                                                                className="d-flex align-items-center gap-1"
-                                                                style={{ minWidth: '140px', justifyContent: 'center' }}
-                                                            >
-                                                                <FaUnlock /> Unban Account
-                                                            </Button>
-                                                        ) : (
-                                                            <Button
-                                                                variant="danger"
-                                                                size="sm"
-                                                                onClick={() => handleBanClick(user)}
-                                                                className="d-flex align-items-center gap-1"
-                                                                style={{ minWidth: '140px', justifyContent: 'center' }}
-                                                            >
-                                                                <FaBan /> Ban Account
-                                                            </Button>
-                                                        )
+                                                        <>
+                                                            {onToggleAdminStatus && (
+                                                                <Button
+                                                                    variant={user.role === 'admin' ? 'warning' : 'secondary'}
+                                                                    size="sm"
+                                                                    onClick={() => onToggleAdminStatus(user.id)}
+                                                                    className="d-flex align-items-center gap-1"
+                                                                    style={{ minWidth: '140px', justifyContent: 'center' }}
+                                                                    title={user.role === 'admin' ? 'Remove Admin' : 'Make Admin'}
+                                                                >
+                                                                    {user.role === 'admin' ? <FaUserShield /> : <FaUser />}
+                                                                    {user.role === 'admin' ? 'Remove Admin' : 'Make Admin'}
+                                                                </Button>
+                                                            )}
+                                                            {isBanned(user.status) ? (
+                                                                <Button
+                                                                    variant="success"
+                                                                    size="sm"
+                                                                    onClick={() => handleUnbanClick(user)}
+                                                                    className="d-flex align-items-center gap-1"
+                                                                    style={{ minWidth: '140px', justifyContent: 'center' }}
+                                                                >
+                                                                    <FaUnlock /> Unban Account
+                                                                </Button>
+                                                            ) : (
+                                                                <Button
+                                                                    variant="danger"
+                                                                    size="sm"
+                                                                    onClick={() => handleBanClick(user)}
+                                                                    className="d-flex align-items-center gap-1"
+                                                                    style={{ minWidth: '140px', justifyContent: 'center' }}
+                                                                >
+                                                                    <FaBan /> Ban Account
+                                                                </Button>
+                                                            )}
+                                                        </>
                                                     )}
                                                 </div>
                                             </td>

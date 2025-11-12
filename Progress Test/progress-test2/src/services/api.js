@@ -34,7 +34,9 @@ export const addPayment = async (payment) => {
         const response = await API.post('/payments', payment);
         return response.data;
     } catch (error) {
-        throw new Error('Failed to add payment');
+        // Giữ nguyên error từ axios để có thể truy cập error.response.status
+        // paymentsSlice sẽ xử lý lỗi 402 với rejectWithValue
+        throw error;
     }
 };
 

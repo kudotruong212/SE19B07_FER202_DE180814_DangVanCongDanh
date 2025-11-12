@@ -32,6 +32,16 @@ const NavigationHeader = () => {
                         >
                             User Management
                         </Nav.Link>
+                        <Nav.Link 
+                            href="/test-payment-error" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                navigate('/test-payment-error');
+                            }}
+                            className="text-warning"
+                        >
+                            🧪 Test Error
+                        </Nav.Link>
                     </Nav>
                     <Nav className="ms-auto d-flex align-items-center">
                         <Navbar.Text className="me-3 d-flex align-items-center">

@@ -14,7 +14,7 @@
       "username": "hainguyen",
       "password": "123456",
       "fullName": "Nguyễn Hải",
-      "role": "user",
+      "role": "admin",
       "status": "blocked",
       "avatar": "/images/users/hainguyen.png"
     },
@@ -93,6 +93,51 @@
       "amount": 2000000,
       "date": "2025-11-07",
       "userId": "1"
+    },
+    {
+      "id": "cec4",
+      "semester": "Spring 2026",
+      "courseName": "Database Systems",
+      "amount": 2000000,
+      "date": "2025-11-13",
+      "userId": "1",
+      "status": "SUCCESS"
+    },
+    {
+      "id": "496b",
+      "semester": "Fall 2025",
+      "courseName": "Test Course - Success",
+      "amount": 5000000,
+      "date": "2025-11-12",
+      "userId": "1",
+      "status": "SUCCESS"
+    },
+    {
+      "semester": "Spring 2026",
+      "courseName": "Database Systems",
+      "amount": 2000000,
+      "date": "2025-11-20",
+      "userId": "1",
+      "status": "SUCCESS",
+      "id": "88qUrKy"
+    },
+    {
+      "semester": "Fall 2025",
+      "courseName": "Cloud Computing",
+      "amount": 200000,
+      "date": "2025-11-12",
+      "userId": "1",
+      "status": "SUCCESS",
+      "id": "5N9R39A"
+    },
+    {
+      "semester": "Spring 2026",
+      "courseName": "Web Development",
+      "amount": 20000000,
+      "date": "2025-11-22",
+      "userId": "1",
+      "status": "SUCCESS",
+      "id": "WQOm9lE"
     }
   ]
 }

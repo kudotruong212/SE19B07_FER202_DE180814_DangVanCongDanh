@@ -1,16 +1,22 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import NavigationHeader from '../components/NavigationHeader';
 import UserFilter from '../components/UserFilter';
 import UserTable from '../components/UserTable';
 import { useAuth } from '../contexts/AuthContext';
+import { fetchUsers, toggleAdminStatus, selectUsers, selectUsersLoading, selectUsersError } from '../store/usersSlice';
 import * as api from '../services/api';
 
 const UserListPage = () => {
     const { user: currentUser } = useAuth();
-    const [users, setUsers] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    
+    // Sử dụng Redux selectors để lấy data từ store
+    const users = useSelector(selectUsers);
+    const isLoading = useSelector(selectUsersLoading);
+    const error = useSelector(selectUsersError);
+    
     const [filters, setFilters] = useState({
         search: '',
         role: '',
@@ -18,23 +24,10 @@ const UserListPage = () => {
     });
     const [sortBy, setSortBy] = useState('id_asc');
 
-    // Fetch users from API
+    // Fetch users from API using Redux thunk
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                setIsLoading(true);
-                setError(null);
-                const data = await api.getUsers();
-                setUsers(data);
-            } catch (err) {
-                setError(err.message || 'Failed to fetch users');
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchUsers();
-    }, []);
+        dispatch(fetchUsers());
+    }, [dispatch]);
 
     // Filter and sort users
     const filteredAndSortedUsers = useMemo(() => {
@@ -107,12 +100,11 @@ const UserListPage = () => {
 
             await api.updateUser(userId, updatedUser);
 
-            // Update local state
-            setUsers(prevUsers => 
-                prevUsers.map(u => u.id === userId ? updatedUser : u)
-            );
+            // Fetch lại users từ Redux store sau khi update
+            dispatch(fetchUsers());
         } catch (err) {
-            setError(err.message || 'Failed to ban user');
+            // Error sẽ được xử lý bởi Redux nếu cần
+            console.error('Failed to ban user:', err);
         }
     };
 
@@ -129,12 +121,34 @@ const UserListPage = () => {
 
             await api.updateUser(userId, updatedUser);
 
-            // Update local state
-            setUsers(prevUsers => 
-                prevUsers.map(u => u.id === userId ? updatedUser : u)
-            );
+            // Fetch lại users từ Redux store sau khi update
+            dispatch(fetchUsers());
         } catch (err) {
-            setError(err.message || 'Failed to unban user');
+            // Error sẽ được xử lý bởi Redux nếu cần
+            console.error('Failed to unban user:', err);
+        }
+    };
+
+    // Handler để toggle admin status sử dụng Redux action
+    const handleToggleAdminStatus = async (userId) => {
+        const user = users.find(u => u.id === userId);
+        if (!user) return;
+
+        // Toggle trong Redux store trước (optimistic update)
+        dispatch(toggleAdminStatus(userId));
+        
+        // Sau đó cập nhật lên server
+        const updatedUser = {
+            ...user,
+            role: user.role === 'admin' ? 'user' : 'admin'
+        };
+        
+        try {
+            await api.updateUser(userId, updatedUser);
+        } catch (err) {
+            console.error('Failed to update user on server:', err);
+            // Rollback bằng cách fetch lại từ server
+            dispatch(fetchUsers());
         }
     };
 
@@ -159,6 +173,7 @@ const UserListPage = () => {
                     error={error}
                     onBanUser={handleBanUser}
                     onUnbanUser={handleUnbanUser}
+                    onToggleAdminStatus={handleToggleAdminStatus}
                     currentUser={currentUser}
                 />
             </Container>

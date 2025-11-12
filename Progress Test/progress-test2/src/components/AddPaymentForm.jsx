@@ -1,12 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Form, Button, Card, Container, Row, Col, Alert, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { usePayment } from '../contexts/PaymentContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../contexts/AuthContext';
+import { createPayment, clearError, selectPayments, selectPaymentsLoading, selectPaymentsError } from '../store/paymentsSlice';
+import { usePayment } from '../contexts/PaymentContext'; // Vẫn dùng để lấy unique semesters/courses
 import NavigationHeader from './NavigationHeader';
 
 const AddPaymentForm = () => {
     const navigate = useNavigate();
-    const { addPayment, getUniqueSemesters, getUniqueCourses } = usePayment();
+    const dispatch = useDispatch();
+    const { user: currentUser } = useAuth();
+    
+    // Redux state
+    const payments = useSelector(selectPayments);
+    const isLoading = useSelector(selectPaymentsLoading);
+    const error = useSelector(selectPaymentsError);
+    
+    // Vẫn dùng PaymentContext để lấy unique semesters và courses (có thể migrate sau)
+    const { getUniqueSemesters, getUniqueCourses } = usePayment();
+    
     const [formData, setFormData] = useState({
         semester: '',
         courseName: '',
@@ -14,12 +27,15 @@ const AddPaymentForm = () => {
         date: '',
     });
     const [errors, setErrors] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
     const semesters = getUniqueSemesters();
     const courses = getUniqueCourses();
+    
+    // Clear error khi component mount
+    useEffect(() => {
+        dispatch(clearError());
+    }, [dispatch]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -61,32 +77,40 @@ const AddPaymentForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
+        dispatch(clearError()); // Clear error trước khi submit
         setSuccess(false);
 
         if (!validate()) {
             return;
         }
 
-        setIsLoading(true);
+        // Sử dụng Redux createPayment action
         try {
-            const result = await addPayment({
-                ...formData,
+            const result = await dispatch(createPayment({
+                semester: formData.semester,
+                courseName: formData.courseName,
                 amount: Number(formData.amount),
-            });
+                date: formData.date,
+                userId: currentUser?.id, // Thêm userId từ current user
+            }));
 
-            if (result.success) {
+            // Kiểm tra kết quả
+            if (createPayment.fulfilled.match(result)) {
+                // Payment được tạo thành công
+                console.log('✅ Payment created successfully:', result.payload);
                 setSuccess(true);
                 setTimeout(() => {
                     navigate('/home');
                 }, 1500);
-            } else {
-                setError(result.error || 'Failed to add payment');
+            } else if (createPayment.rejected.match(result)) {
+                // Có lỗi xảy ra - error đã được lưu trong Redux store
+                console.error('❌ Payment creation failed:', result.payload);
+                console.error('❌ Error details:', result);
+                // Error đã được lưu trong Redux state và sẽ hiển thị qua useSelector
             }
         } catch (err) {
-            setError('An error occurred while adding payment');
-        } finally {
-            setIsLoading(false);
+            // Lỗi không mong đợi
+            console.error('❌ Unexpected error:', err);
         }
     };
 
@@ -98,7 +122,7 @@ const AddPaymentForm = () => {
             date: '',
         });
         setErrors({});
-        setError(null);
+        dispatch(clearError());
         setSuccess(false);
     };
 
@@ -114,13 +138,25 @@ const AddPaymentForm = () => {
                             </Card.Header>
                             <Card.Body>
                                 {error && (
-                                    <Alert variant="danger" dismissible onClose={() => setError(null)}>
-                                        {error}
+                                    <Alert variant="danger" dismissible onClose={() => dispatch(clearError())}>
+                                        <Alert.Heading>❌ Lỗi!</Alert.Heading>
+                                        <p className="mb-0">
+                                            <strong>{error}</strong>
+                                        </p>
+                                        {error === 'Tài khoản không đủ tiền' && (
+                                            <>
+                                                <hr />
+                                                <p className="mb-0 small">
+                                                    💡 <strong>Lưu ý:</strong> Đây là lỗi 402 (Payment Required) được xử lý bằng <code>rejectWithValue</code> trong Redux Toolkit.
+                                                </p>
+                                            </>
+                                        )}
                                     </Alert>
                                 )}
                                 {success && (
                                     <Alert variant="success">
-                                        Thêm thanh toán thành công! Đang chuyển hướng...
+                                        <Alert.Heading>✅ Thành công!</Alert.Heading>
+                                        <p className="mb-0">Thêm thanh toán thành công! Đang chuyển hướng...</p>
                                     </Alert>
                                 )}
 

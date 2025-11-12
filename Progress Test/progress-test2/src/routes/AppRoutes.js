@@ -6,6 +6,7 @@ import LoginPage from '../pages/LoginPage';
 import DashboardPage from '../pages/DashboardPage';
 import AddPaymentPage from '../pages/AddPaymentPage';
 import UserListPage from '../pages/UserListPage';
+import TestPaymentErrorPage from '../pages/TestPaymentErrorPage';
 
 // Component để bảo vệ các route cần xác thực
 const PrivateRoute = ({ children }) => {
@@ -66,7 +67,17 @@ const AppRoutes = () => {
                     } 
                 />
                 
-                {/* 6. Xử lý tất cả các đường dẫn không xác định: Chuyển hướng đến /home */}
+                {/* 6. Route Test Payment Error (chỉ để test) */}
+                <Route 
+                    path="/test-payment-error" 
+                    element={
+                        <PrivateRoute>
+                            <TestPaymentErrorPage />
+                        </PrivateRoute>
+                    } 
+                />
+                
+                {/* 7. Xử lý tất cả các đường dẫn không xác định: Chuyển hướng đến /home */}
                 <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
         </Router>

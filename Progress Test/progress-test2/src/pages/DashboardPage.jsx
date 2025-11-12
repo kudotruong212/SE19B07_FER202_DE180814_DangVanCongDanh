@@ -5,6 +5,7 @@ import { FaPlus } from 'react-icons/fa';
 import NavigationHeader from '../components/NavigationHeader';
 import FilterBar from '../components/FilterBar';
 import PaymentTable from '../components/PaymentTable';
+import SuccessfulPaymentsStats from '../components/SuccessfulPaymentsStats';
 
 const DashboardPage = () => {
     const navigate = useNavigate();
@@ -26,6 +27,9 @@ const DashboardPage = () => {
                         Thêm Thanh toán
                     </Button>
                 </div>
+
+                {/* Redux Selector Demo - Successful Payments Stats */}
+                <SuccessfulPaymentsStats />
 
                 <FilterBar />
                 <PaymentTable />
