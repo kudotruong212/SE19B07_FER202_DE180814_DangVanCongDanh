@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "anhnv",
+      "password": "admin123",
+      "fullName": "Nguyễn Văn Anh"
+    },
+    {
+      "id": "2",
+      "username": "TamNT",
+      "password": "admin123",
+      "fullName": "Nguyễn Thị Tâm"
+    }
+  ],
+  "expenses": [
+    {
+      "name": "Lunch",
+      "category": "Food",
+      "amount": 85000,
+      "date": "2025-10-02",
+      "userId": "1",
+      "id": "1"
+    },
+    {
+      "name": "Electricity Bill",
+      "category": "Utilities",
+      "amount": 460000,
+      "date": "2025-10-03",
+      "userId": "1",
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "userId": "1",
+      "name": "Cinema",
+      "amount": 120000,
+      "category": "Entertainment",
+      "date": "2025-10-05"
+    },
+    {
+      "name": "Cafe",
+      "category": "Food",
+      "amount": 65000,
+      "date": "2025-10-07",
+      "userId": "1",
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "userId": "2",
+      "name": "Breakfast",
+      "amount": 40000,
+      "category": "Food",
+      "date": "2025-10-01"
+    },
+    {
+      "id": "6",
+      "userId": "2",
+      "name": "Internet Bill",
+      "amount": 250000,
+      "category": "Utilities",
+      "date": "2025-10-03"
+    },
+    {
+      "name": "Buy clothes",
+      "category": "Entertainment",
+      "amount": 2000000,
+      "date": "2025-10-07",
+      "userId": "1",
+      "id": "NpEtJtN"
+    },
+    {
+      "name": "DisFake",
+      "category": "Food",
+      "amount": 400000,
+      "date": "2025-10-07",
+      "userId": "1",
+      "id": "uGPeRA6"
+    }
+  ]
+}
