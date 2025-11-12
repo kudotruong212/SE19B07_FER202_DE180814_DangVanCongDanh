@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Administrator"
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "password": "123456",
+      "fullName": "User One"
+    },
+    {
+      "id": "3",
+      "username": "test@example.com",
+      "email": "test@example.com",
+      "password": "123456",
+      "fullName": "Test User"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "userId": "1",
+      "studentId": "SV001",
+      "fullName": "Nguyễn Văn An",
+      "email": "nguyenvanan@example.com",
+      "phone": "0912345678",
+      "class": "CNTT2021",
+      "gpa": 3.5,
+      "dateOfBirth": "2003-05-15"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "studentId": "SV002",
+      "fullName": "Trần Thị Bình",
+      "email": "tranthibinh@example.com",
+      "phone": "0912345679",
+      "class": "CNTT2021",
+      "gpa": 3.8,
+      "dateOfBirth": "2003-07-20"
+    },
+    {
+      "id": "3",
+      "userId": "2",
+      "studentId": "SV003",
+      "fullName": "Lê Văn Cường",
+      "email": "levancuong@example.com",
+      "phone": "0912345680",
+      "class": "KT2021",
+      "gpa": 3.2,
+      "dateOfBirth": "2003-03-10"
+    },
+    {
+      "id": "4",
+      "userId": "1",
+      "studentId": "SV004",
+      "fullName": "Phạm Thị Dung",
+      "email": "phamthidung@example.com",
+      "phone": "0912345681",
+      "class": "CNTT2021",
+      "gpa": 3.9,
+      "dateOfBirth": "2003-09-25"
+    },
+    {
+      "id": "5",
+      "userId": "2",
+      "studentId": "SV005",
+      "fullName": "Hoàng Văn Em",
+      "email": "hoangvanem@example.com",
+      "phone": "0912345682",
+      "class": "KT2021",
+      "gpa": 2.8,
+      "dateOfBirth": "2003-11-30"
+    },
+    {
+      "id": "6",
+      "userId": "1",
+      "studentId": "SV006",
+      "fullName": "Vũ Thị Phương",
+      "email": "vuthiphuong@example.com",
+      "phone": "0912345683",
+      "class": "CNTT2022",
+      "gpa": 3.7,
+      "dateOfBirth": "2004-01-15"
+    }
+  ]
+}
+

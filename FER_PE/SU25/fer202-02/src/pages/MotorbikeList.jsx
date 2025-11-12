@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Button, Badge, Alert, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Badge, Alert, Form, Spinner } from 'react-bootstrap';
 import { useMotorbikes } from '../contexts/MotorbikeContext';
 import { useCart } from '../contexts/CartContext';
-import * as motorbikeAPI from '../api/motorbikeAPI';
-import PropTypes from 'prop-types';
+import * as api from '../services/api';
+import NavigationHeader from '../components/NavigationHeader';
 
 const MotorbikeList = () => {
   const { motorbikes, loading, updateMotorbikeStock } = useMotorbikes();
@@ -51,13 +51,13 @@ const MotorbikeList = () => {
       
       // Giảm stock trong JSON Server
       const newStock = motorbike.stock - 1;
-      await motorbikeAPI.updateMotorbike(motorbike.id, {
+      await api.updateMotorbike(motorbike.id, {
         ...motorbike,
         stock: newStock
       });
       
       // Cập nhật state
-      updateMotorbikeStock(motorbike.id, newStock);
+      await updateMotorbikeStock(motorbike.id, newStock);
       
       // Hiển thị success message
       setSuccessMessage(`${motorbike.model} has been added to your cart.`);
@@ -75,14 +75,22 @@ const MotorbikeList = () => {
 
   if (loading) {
     return (
-      <Container className="mt-4">
-        <p>Loading motorbikes...</p>
-      </Container>
+      <>
+        <NavigationHeader />
+        <Container className="mt-4">
+          <div className="text-center">
+            <Spinner animation="border" variant="primary" />
+            <p className="mt-3">Loading motorbikes...</p>
+          </div>
+        </Container>
+      </>
     );
   }
 
   return (
-    <Container className="mt-4">
+    <>
+      <NavigationHeader />
+      <Container className="mt-4">
       <h1 className="mb-4">Motorbike List</h1>
 
       {/* Success message với View Cart button */}
@@ -118,14 +126,15 @@ const MotorbikeList = () => {
       {/* Motorbike cards */}
       <Row>
         {filteredAndSorted.map(motorbike => (
-          <Col key={motorbike.id} md={4} className="mb-4">
+          <Col key={motorbike.id} md={3} className="mb-4">
             <Card style={{ height: '100%' }}>
               <Card.Img
                 variant="top"
                 src={motorbike.image}
+                alt={`${motorbike.brand} ${motorbike.model}`}
                 style={{ height: '250px', objectFit: 'cover' }}
                 onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/400x300?text=No+Image';
+                  e.target.src = '/images/motorbikes/honda-winner.jpg';
                 }}
               />
               <Card.Body className="d-flex flex-column">
@@ -156,17 +165,8 @@ const MotorbikeList = () => {
         ))}
       </Row>
     </Container>
+    </>
   );
-};
-
-MotorbikeList.propTypes = {
-  motorbikes: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  updateMotorbikeStock: PropTypes.func.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired,
-  successMessage: PropTypes.string.isRequired,
-  setSuccessMessage: PropTypes.func.isRequired
 };
 
 export default MotorbikeList;

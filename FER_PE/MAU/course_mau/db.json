@@ -1,0 +1,136 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Nguyễn Văn Admin",
+      "role": "admin",
+      "status": "active",
+      "avatar": "/images/users/admin.png"
+    },
+    {
+      "id": "2",
+      "username": "instructor",
+      "password": "123456",
+      "fullName": "Trần Thị Giảng Viên",
+      "role": "admin",
+      "status": "active",
+      "avatar": "/images/users/instructor.png"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "title": "React.js Fundamentals",
+      "description": "Learn the fundamentals of React.js including components, props, state, and hooks. Build modern web applications with React.",
+      "instructor": "Nguyễn Văn A",
+      "category": "Web Development",
+      "duration": 40,
+      "price": 2500000,
+      "startDate": "2024-03-01",
+      "endDate": "2024-04-30",
+      "status": "upcoming",
+      "students": 0,
+      "imageUrl": "/images/courses/react-fundamentals.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Node.js Backend Development",
+      "description": "Master Node.js and build scalable backend applications. Learn Express.js, RESTful APIs, and database integration.",
+      "instructor": "Trần Thị B",
+      "category": "Backend Development",
+      "duration": 50,
+      "price": 3000000,
+      "startDate": "2024-02-15",
+      "endDate": "2024-04-15",
+      "status": "ongoing",
+      "students": 25,
+      "imageUrl": "/images/courses/nodejs-backend.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Full Stack JavaScript",
+      "description": "Complete full-stack development course covering React, Node.js, MongoDB, and deployment. Build real-world projects.",
+      "instructor": "Lê Văn C",
+      "category": "Full Stack",
+      "duration": 80,
+      "price": 5000000,
+      "startDate": "2024-01-10",
+      "endDate": "2024-04-10",
+      "status": "ongoing",
+      "students": 35,
+      "imageUrl": "/images/courses/fullstack-js.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Python for Data Science",
+      "description": "Learn Python programming for data analysis, machine learning, and data visualization using pandas, numpy, and matplotlib.",
+      "instructor": "Phạm Thị D",
+      "category": "Data Science",
+      "duration": 60,
+      "price": 3500000,
+      "startDate": "2023-11-01",
+      "endDate": "2024-01-31",
+      "status": "completed",
+      "students": 42,
+      "imageUrl": "/images/courses/python-datascience.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Mobile App Development with React Native",
+      "description": "Build cross-platform mobile applications using React Native. Learn navigation, state management, and native modules.",
+      "instructor": "Hoàng Văn E",
+      "category": "Mobile Development",
+      "duration": 45,
+      "price": 4000000,
+      "startDate": "2024-03-15",
+      "endDate": "2024-05-15",
+      "status": "upcoming",
+      "students": 0,
+      "imageUrl": "/images/courses/react-native.jpg"
+    },
+    {
+      "id": "6",
+      "title": "UI/UX Design Fundamentals",
+      "description": "Master the principles of user interface and user experience design. Learn design tools, prototyping, and user research.",
+      "instructor": "Vũ Thị F",
+      "category": "Design",
+      "duration": 35,
+      "price": 2800000,
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-20",
+      "status": "ongoing",
+      "students": 28,
+      "imageUrl": "/images/courses/uiux-design.jpg"
+    },
+    {
+      "id": "7",
+      "title": "Database Design and SQL",
+      "description": "Learn database design principles, SQL queries, normalization, and database optimization. Work with MySQL and PostgreSQL.",
+      "instructor": "Đặng Văn G",
+      "category": "Database",
+      "duration": 30,
+      "price": 2200000,
+      "startDate": "2024-04-01",
+      "endDate": "2024-05-31",
+      "status": "upcoming",
+      "students": 0,
+      "imageUrl": "/images/courses/database-sql.jpg"
+    },
+    {
+      "id": "8",
+      "title": "DevOps and Cloud Computing",
+      "description": "Learn DevOps practices, Docker, Kubernetes, CI/CD, and cloud platforms (AWS, Azure). Deploy and scale applications.",
+      "instructor": "Bùi Thị H",
+      "category": "DevOps",
+      "duration": 55,
+      "price": 4500000,
+      "startDate": "2023-12-01",
+      "endDate": "2024-02-29",
+      "status": "completed",
+      "students": 38,
+      "imageUrl": "/images/courses/devops-cloud.jpg"
+    }
+  ]
+}

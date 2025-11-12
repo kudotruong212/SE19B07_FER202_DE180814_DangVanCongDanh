@@ -1,0 +1,120 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Nguyễn Văn Admin",
+      "role": "admin",
+      "status": "active",
+      "avatar": "/images/users/admin.png"
+    },
+    {
+      "id": "2",
+      "username": "librarian",
+      "password": "123456",
+      "fullName": "Trần Thị Thủ Thư",
+      "role": "admin",
+      "status": "active",
+      "avatar": "/images/users/librarian.png"
+    }
+  ],
+  "books": [
+    {
+      "id": "1",
+      "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+      "author": "Robert C. Martin",
+      "isbn": "978-0132350884",
+      "category": "Programming",
+      "price": 450000,
+      "publishedDate": "2008-08-11",
+      "description": "A handbook of agile software craftsmanship with practical advice on writing clean, maintainable code.",
+      "status": "available",
+      "imageUrl": "/images/books/clean-code.jpg"
+    },
+    {
+      "id": "2",
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt, David Thomas",
+      "isbn": "978-0201616224",
+      "category": "Programming",
+      "price": 520000,
+      "publishedDate": "1999-10-30",
+      "description": "Your journey to mastery. Learn how to become a more productive and pragmatic programmer.",
+      "status": "available",
+      "imageUrl": "/images/books/pragmatic-programmer.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "author": "Gang of Four",
+      "isbn": "978-0201633610",
+      "category": "Programming",
+      "price": 680000,
+      "publishedDate": "1994-10-21",
+      "description": "A catalog of simple and succinct solutions to commonly occurring design problems.",
+      "status": "borrowed",
+      "imageUrl": "/images/books/design-patterns.jpg"
+    },
+    {
+      "id": "4",
+      "title": "JavaScript: The Definitive Guide",
+      "author": "David Flanagan",
+      "isbn": "978-1491952026",
+      "category": "Programming",
+      "price": 750000,
+      "publishedDate": "2020-06-09",
+      "description": "Master the world's most-used programming language with this comprehensive guide.",
+      "status": "available",
+      "imageUrl": "/images/books/javascript-guide.jpg"
+    },
+    {
+      "id": "5",
+      "title": "React: Up and Running",
+      "author": "Stoyan Stefanov",
+      "isbn": "978-1491931823",
+      "category": "Web Development",
+      "price": 580000,
+      "publishedDate": "2016-03-15",
+      "description": "Build web applications with React and Redux from scratch.",
+      "status": "reserved",
+      "imageUrl": "/images/books/react-up-running.jpg"
+    },
+    {
+      "id": "6",
+      "title": "Node.js Design Patterns",
+      "author": "Mario Casciaro",
+      "isbn": "978-1785885587",
+      "category": "Web Development",
+      "price": 620000,
+      "publishedDate": "2016-07-28",
+      "description": "Master Node.js and build better applications with design patterns.",
+      "status": "available",
+      "imageUrl": "/images/books/nodejs-patterns.jpg"
+    },
+    {
+      "id": "7",
+      "title": "Database Systems: The Complete Book",
+      "author": "Hector Garcia-Molina",
+      "isbn": "978-0131873254",
+      "category": "Database",
+      "price": 890000,
+      "publishedDate": "2008-01-01",
+      "description": "Comprehensive introduction to database systems.",
+      "status": "available",
+      "imageUrl": "/images/books/database-systems.jpg"
+    },
+    {
+      "id": "8",
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen",
+      "isbn": "978-0262033848",
+      "category": "Computer Science",
+      "price": 1200000,
+      "publishedDate": "2009-07-31",
+      "description": "The leading textbook on algorithms used in universities worldwide.",
+      "status": "borrowed",
+      "imageUrl": "/images/books/algorithms.jpg"
+    }
+  ]
+}

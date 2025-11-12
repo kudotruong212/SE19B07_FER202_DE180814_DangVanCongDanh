@@ -1,0 +1,200 @@
+{
+  // ============================================
+  // 🔄 HƯỚNG DẪN CHUYỂN ĐỔI - db.json
+  // ============================================
+  // BƯỚC 1: Đổi tên collection "items" thành tên đối tượng mới (ví dụ: "products", "books", "courses")
+  // BƯỚC 2: Thay đổi các fields bên trong collection theo đối tượng mới
+  // BƯỚC 3: Cập nhật dữ liệu mẫu cho phù hợp với đối tượng mới
+  // ============================================
+  
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Nguyễn Văn Admin",
+      "role": "admin",
+      "status": "active",
+      "avatar": "/images/users/admin.png"
+    },
+    {
+      "id": "2",
+      "username": "manager",
+      "password": "123456",
+      "fullName": "Trần Thị Quản Lý",
+      "role": "admin",
+      "status": "active",
+      "avatar": "/images/users/manager.png"
+    }
+  ],
+  
+  // ⚠️ CẦN ĐỔI: "items" -> tên đối tượng mới (ví dụ: "products", "books", "courses")
+  "items": [
+    {
+      // ⚠️ CẦN ĐỔI: Tất cả các fields bên dưới theo đối tượng mới
+      "id": "1",
+      // ⚠️ ĐỔI: "name" -> tên field phù hợp (ví dụ: "title", "productName", "bookTitle")
+      "name": "Laptop Dell XPS 13",
+      // ⚠️ ĐỔI: "brand" -> field phù hợp (ví dụ: "author", "manufacturer", "publisher")
+      "brand": "Dell",
+      // ⚠️ ĐỔI: "model" -> field phù hợp (ví dụ: "isbn", "sku", "code")
+      "model": "XPS 13 9320",
+      // ⚠️ ĐỔI: "serialNumber" -> field phù hợp (có thể xóa nếu không cần)
+      "serialNumber": "DL-XPS13-2024-001",
+      // ⚠️ ĐỔI: "purchaseDate" -> field phù hợp (ví dụ: "publishedDate", "createdDate")
+      "purchaseDate": "2024-01-15",
+      // ⚠️ ĐỔI: "warrantyDate" -> field phù hợp (ví dụ: "expiryDate", "endDate", có thể xóa)
+      "warrantyDate": "2027-01-15",
+      // ⚠️ ĐỔI: "location" -> field phù hợp (ví dụ: "category", "department", có thể xóa)
+      "location": "Phòng IT - Tầng 2",
+      // ⚠️ ĐỔI: "condition" -> field phù hợp (ví dụ: "quality", "rating", có thể xóa)
+      "condition": "excellent",
+      // ⚠️ ĐỔI: "price" -> field phù hợp (ví dụ: "price", "amount", "cost")
+      "price": 25000000,
+      // ⚠️ ĐỔI: "status" -> field phù hợp (ví dụ: "status", "state", "availability")
+      "status": "available",
+      // ⚠️ ĐỔI: "description" -> field phù hợp (ví dụ: "description", "details", "summary")
+      "description": "Laptop cao cấp với màn hình 13.3 inch, CPU Intel i7, RAM 16GB, SSD 512GB. Sử dụng cho công việc phát triển phần mềm.",
+      // ⚠️ ĐỔI: "imageUrl" -> field phù hợp (ví dụ: "imageUrl", "photo", "thumbnail", có thể xóa)
+      "imageUrl": "/images/items/laptop-dell-xps.jpg"
+      
+      // 💡 THÊM: Có thể thêm các fields mới phù hợp với đối tượng của bạn
+      // Ví dụ: "quantity", "stock", "weight", "dimensions", "color", etc.
+    },
+    {
+      "id": "2",
+      "name": "Monitor LG UltraWide",
+      "brand": "LG",
+      "model": "34WP65C-B",
+      "serialNumber": "LG-34WP65C-2024-002",
+      "purchaseDate": "2024-02-20",
+      "warrantyDate": "2027-02-20",
+      "location": "Phòng Design - Tầng 3",
+      "condition": "excellent",
+      "price": 12000000,
+      "status": "in-use",
+      "description": "Màn hình UltraWide 34 inch, độ phân giải 3440x1440, hỗ trợ USB-C. Phù hợp cho công việc thiết kế đồ họa.",
+      "imageUrl": "/images/items/monitor-lg-ultrawide.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Keyboard Mechanical",
+      "brand": "Logitech",
+      "model": "MX Keys",
+      "serialNumber": "LOG-MXKEYS-2024-003",
+      "purchaseDate": "2023-12-10",
+      "warrantyDate": "2026-12-10",
+      "location": "Phòng IT - Tầng 2",
+      "condition": "good",
+      "price": 2500000,
+      "status": "in-use",
+      "description": "Bàn phím cơ không dây, backlit, hỗ trợ đa thiết bị. Pin sử dụng lâu, phù hợp cho lập trình viên.",
+      "imageUrl": "/images/items/keyboard-logitech.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Mouse Wireless",
+      "brand": "Logitech",
+      "model": "MX Master 3",
+      "serialNumber": "LOG-MXMASTER3-2024-004",
+      "purchaseDate": "2024-03-05",
+      "warrantyDate": "2027-03-05",
+      "location": "Phòng IT - Tầng 2",
+      "condition": "excellent",
+      "price": 2200000,
+      "status": "available",
+      "description": "Chuột không dây cao cấp, có scroll wheel đa hướng, hỗ trợ gesture, pin sử dụng 70 ngày.",
+      "imageUrl": "/images/items/mouse-logitech.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Printer HP LaserJet",
+      "brand": "HP",
+      "model": "LaserJet Pro M404dn",
+      "serialNumber": "HP-LJPRO404-2023-005",
+      "purchaseDate": "2023-11-20",
+      "warrantyDate": "2026-11-20",
+      "location": "Phòng Hành Chính - Tầng 1",
+      "condition": "good",
+      "price": 8500000,
+      "status": "in-use",
+      "description": "Máy in laser đen trắng, tốc độ in 38 trang/phút, in hai mặt tự động, kết nối mạng.",
+      "imageUrl": "/images/items/printer-hp.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Projector Epson",
+      "brand": "Epson",
+      "model": "EB-X41",
+      "serialNumber": "EPS-EBX41-2023-006",
+      "purchaseDate": "2023-10-15",
+      "warrantyDate": "2026-10-15",
+      "location": "Phòng Họp - Tầng 4",
+      "condition": "fair",
+      "price": 15000000,
+      "status": "maintenance",
+      "description": "Máy chiếu công nghệ 3LCD, độ phân giải XGA, độ sáng 3600 lumens. Đang bảo trì định kỳ.",
+      "imageUrl": "/images/items/projector-epson.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Tablet iPad Pro",
+      "brand": "Apple",
+      "model": "iPad Pro 12.9-inch",
+      "serialNumber": "APP-IPADPRO-2024-007",
+      "purchaseDate": "2024-01-30",
+      "warrantyDate": "2025-01-30",
+      "location": "Phòng Design - Tầng 3",
+      "condition": "excellent",
+      "price": 28000000,
+      "status": "in-use",
+      "description": "iPad Pro 12.9 inch với chip M2, màn hình Liquid Retina XDR, hỗ trợ Apple Pencil. Dùng cho thiết kế đồ họa.",
+      "imageUrl": "/images/items/ipad-pro.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Camera DSLR",
+      "brand": "Canon",
+      "model": "EOS 90D",
+      "serialNumber": "CAN-EOS90D-2023-008",
+      "purchaseDate": "2023-09-25",
+      "warrantyDate": "2026-09-25",
+      "location": "Phòng Marketing - Tầng 2",
+      "condition": "good",
+      "price": 22000000,
+      "status": "available",
+      "description": "Máy ảnh DSLR APS-C, 32.5MP, quay video 4K, màn hình xoay lật. Sử dụng cho quay phim và chụp ảnh sản phẩm.",
+      "imageUrl": "/images/items/camera-canon.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Server Rack",
+      "brand": "Dell",
+      "model": "PowerEdge R740",
+      "serialNumber": "DL-PER740-2022-009",
+      "purchaseDate": "2022-08-10",
+      "warrantyDate": "2025-08-10",
+      "location": "Phòng Server - Tầng Hầm",
+      "condition": "good",
+      "price": 45000000,
+      "status": "in-use",
+      "description": "Server rack 2U, CPU Xeon, RAM 64GB, HDD 2TB x4. Dùng để lưu trữ dữ liệu và chạy ứng dụng nội bộ.",
+      "imageUrl": "/images/items/server-dell.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Router Cisco",
+      "brand": "Cisco",
+      "model": "ISR 4331",
+      "serialNumber": "CIS-ISR4331-2023-010",
+      "purchaseDate": "2023-07-15",
+      "warrantyDate": "2026-07-15",
+      "location": "Phòng Server - Tầng Hầm",
+      "condition": "excellent",
+      "price": 18000000,
+      "status": "in-use",
+      "description": "Router doanh nghiệp, hỗ trợ VPN, firewall, quản lý băng thông. Đảm bảo mạng nội bộ hoạt động ổn định.",
+      "imageUrl": "/images/items/router-cisco.jpg"
+    }
+  ]
+}

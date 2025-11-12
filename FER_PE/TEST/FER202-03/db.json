@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Administrator"
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "password": "123456",
+      "fullName": "User One"
+    },
+    {
+      "id": "3",
+      "username": "test@example.com",
+      "email": "test@example.com",
+      "password": "123456",
+      "fullName": "Test User"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "fullName": "Nguyễn Hồng Phúc",
+      "email": "phuc.nguyen@example.com",
+      "major": "Software Engineering"
+    },
+    {
+      "id": 2,
+      "fullName": "Trần Kim Thắng",
+      "email": "thang.tran@example.com",
+      "major": "Information Technology"
+    },
+    {
+      "id": 3,
+      "fullName": "Phan Thành Tài",
+      "email": "tai.phan@example.com",
+      "major": "Computer Science"
+    },
+    {
+      "id": 4,
+      "fullName": "Đặng Văn Công Danh",
+      "email": "danh.dang@example.com",
+      "major": "Software Engineering"
+    },
+    {
+      "id": 5,
+      "fullName": "Lê Thị Minh Thư",
+      "email": "thu.le@example.com",
+      "major": "Artificial Intelligence"
+    }
+  ]
+}
+

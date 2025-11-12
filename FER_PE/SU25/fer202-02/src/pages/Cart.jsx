@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Table, Button, Form, Alert } from 'react-bootstrap';
 import { useCart } from '../contexts/CartContext';
 import { useMotorbikes } from '../contexts/MotorbikeContext';
-import * as motorbikeAPI from '../api/motorbikeAPI';
-import PropTypes from 'prop-types';
+import * as api from '../services/api';
+import NavigationHeader from '../components/NavigationHeader';
+import ConfirmModal from '../components/ConfirmModal';
 
 const Cart = () => {
-  const { items, updateQuantity, removeFromCart } = useCart();
+  const { items, updateQuantity, removeFromCart, clearCart } = useCart();
   const { updateMotorbikeStock } = useMotorbikes();
   const navigate = useNavigate();
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const [checkoutSuccess, setCheckoutSuccess] = useState(false);
+  const [checkoutTotal, setCheckoutTotal] = useState(0);
 
   // Xử lý cập nhật quantity
   const handleQuantityChange = async (id, newQuantity) => {
@@ -30,7 +34,7 @@ const Cart = () => {
     // Cập nhật stock trong JSON Server
     try {
       // Lấy thông tin motorbike hiện tại từ server
-      const motorbike = await motorbikeAPI.getMotorbikeById(id);
+      const motorbike = await api.getMotorbikeById(id);
       
       // Tính stock mới (nếu tăng quantity thì giảm stock, ngược lại tăng stock)
       const newStock = motorbike.stock - quantityDiff;
@@ -44,13 +48,13 @@ const Cart = () => {
       }
 
       // Cập nhật stock trong JSON Server
-      await motorbikeAPI.updateMotorbike(id, {
+      await api.updateMotorbike(id, {
         ...motorbike,
         stock: newStock
       });
 
       // Cập nhật state trong context
-      updateMotorbikeStock(id, newStock);
+      await updateMotorbikeStock(id, newStock);
     } catch (error) {
       console.error('Error updating stock:', error);
       // Revert quantity về giá trị cũ nếu có lỗi
@@ -66,19 +70,19 @@ const Cart = () => {
 
     try {
       // Lấy thông tin motorbike hiện tại từ server
-      const motorbike = await motorbikeAPI.getMotorbikeById(id);
+      const motorbike = await api.getMotorbikeById(id);
       
       // Restore stock: thêm lại số lượng đã mua
       const newStock = motorbike.stock + item.quantity;
       
       // Cập nhật stock trong JSON Server
-      await motorbikeAPI.updateMotorbike(id, {
+      await api.updateMotorbike(id, {
         ...motorbike,
         stock: newStock
       });
 
       // Cập nhật state trong context
-      updateMotorbikeStock(id, newStock);
+      await updateMotorbikeStock(id, newStock);
 
       // Xóa item khỏi cart
       removeFromCart(id);
@@ -92,22 +96,59 @@ const Cart = () => {
   const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const total = subtotal;
 
-  // Nếu cart trống
-  if (items.length === 0) {
+  // Xử lý checkout
+  const handleCheckout = () => {
+    setShowCheckoutModal(true);
+  };
+
+  const handleConfirmCheckout = () => {
+    // Lưu total trước khi clear cart
+    const finalTotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    setCheckoutTotal(finalTotal);
+    
+    // Clear cart sau khi checkout thành công
+    clearCart();
+    setShowCheckoutModal(false);
+    setCheckoutSuccess(true);
+    
+    // Redirect về trang motorbikes sau 2 giây
+    setTimeout(() => {
+      setCheckoutSuccess(false);
+      setCheckoutTotal(0);
+      navigate('/motorbikes');
+    }, 2000);
+  };
+
+  // Nếu cart trống và không phải sau khi checkout thành công
+  if (items.length === 0 && !checkoutSuccess) {
     return (
-      <Container className="mt-4">
-        <h1 className="mb-4">Your Cart</h1>
-        <Alert variant="info">Your cart is empty.</Alert>
-        <Button variant="primary" onClick={() => navigate('/motorbikes')} className="mt-3">
-          Go to Motorbike List
-        </Button>
-      </Container>
+      <>
+        <NavigationHeader />
+        <Container className="mt-4">
+          <h1 className="mb-4">Your Cart</h1>
+          <Alert variant="info">Your cart is empty.</Alert>
+          <Button variant="primary" onClick={() => navigate('/motorbikes')} className="mt-3">
+            Go to Motorbike List
+          </Button>
+        </Container>
+      </>
     );
   }
 
   return (
-    <Container className="mt-4">
+    <>
+      <NavigationHeader />
+      <Container className="mt-4">
       <h1 className="mb-4">Your Cart</h1>
+      
+      {/* Checkout Success Message */}
+      {checkoutSuccess && (
+        <Alert variant="success" className="mb-4">
+          <Alert.Heading>Checkout Successful!</Alert.Heading>
+          <p className="mb-0">Thank you for your purchase. Total amount: <strong>${checkoutTotal.toFixed(2)}</strong></p>
+          <p className="mb-0 mt-2">Redirecting to motorbike list...</p>
+        </Alert>
+      )}
       
       <Table striped bordered hover responsive>
         <thead>
@@ -158,9 +199,7 @@ const Cart = () => {
             <td>
               <Button
                 variant="success"
-                onClick={() => {
-                  alert('Checkout functionality not implemented in this exam');
-                }}
+                onClick={handleCheckout}
               >
                 Checkout
               </Button>
@@ -174,13 +213,22 @@ const Cart = () => {
           Continue Shopping
         </Button>
       </div>
-    </Container>
-  );
-};
 
-// PropTypes validation
-Cart.propTypes = {
-  // Component này không nhận props, nhưng có thể thêm nếu cần
+      {/* Checkout Confirmation Modal */}
+      <ConfirmModal
+        show={showCheckoutModal}
+        onHide={() => setShowCheckoutModal(false)}
+        onConfirm={handleConfirmCheckout}
+        title="Confirm Checkout"
+        message={`Are you sure you want to checkout? Total amount: $${total.toFixed(2)}`}
+        confirmText="Confirm Checkout"
+        cancelText="Cancel"
+        confirmVariant="success"
+        showCancel={true}
+      />
+    </Container>
+    </>
+  );
 };
 
 export default Cart;

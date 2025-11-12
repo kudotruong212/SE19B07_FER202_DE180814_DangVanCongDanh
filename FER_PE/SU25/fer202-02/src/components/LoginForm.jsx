@@ -18,7 +18,6 @@ const initialFormState = {
 function formReducer(state, action) {
   switch (action.type) {
     case 'SET_FIELD':
-      // Cập nhật giá trị vào state.formData
       return {
         ...state,
         formData: {
@@ -27,13 +26,11 @@ function formReducer(state, action) {
         },
       };
     case 'SET_ERROR':
-      // Cập nhật lỗi cho trường cụ thể
       return {
         ...state,
         errors: { ...state.errors, [action.field]: action.message },
       };
     case 'CLEAR_ERROR':
-      // Xóa lỗi cho trường cụ thể
       const { [action.field]: removed, ...restErrors } = state.errors;
       return {
         ...state,
@@ -154,9 +151,7 @@ function LoginForm() {
 
   //9. Xử lý reset form
   const handleReset = () => { 
-    //1. Reset form state về ban đầu
     dispatch({ type: 'RESET_FORM' });
-    //2. Xóa lỗi từ AuthContext nếu có
     if (error) clearError();
   };
 
@@ -256,7 +251,7 @@ function LoginForm() {
       <ConfirmModal
         show={formState.showSuccessModal}
         title="Login Successful!"
-        message={`Welcome, ${user?.username}!, login successful.`}
+        message={`Welcome, ${user?.username || formState.formData.username}!, login successful.`}
         onConfirm={handleCloseSuccessModal}
         onHide={handleCloseSuccessModal}
         confirmText="OK"
@@ -267,4 +262,3 @@ function LoginForm() {
 }
 
 export default LoginForm;
-

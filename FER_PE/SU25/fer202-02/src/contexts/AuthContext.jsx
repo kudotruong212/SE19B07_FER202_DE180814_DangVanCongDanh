@@ -18,7 +18,7 @@ if (initialAuthState.user) {
     initialAuthState.isAuthenticated = true;
 }
 
-// 3. Tạo hàm reduce để quản lý các hành động liên quan đến xác thực
+// 3. Tạo hàm reducer để quản lý các hành động liên quan đến xác thực
 const authReducer = (state, action) => {
     switch (action.type) { 
         case 'LOGIN_START':

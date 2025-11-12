@@ -1,7 +1,7 @@
 //AppRoutes.js định nghĩa các route cho ứng dụng sử dụng React Router
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext.jsx'; // Import useAuth
+import { useAuth } from '../contexts/AuthContext';
 import LoginPage from '../pages/LoginPage';
 import MotorbikeList from '../pages/MotorbikeList';
 import MotorbikeDetail from '../pages/MotorbikeDetail';
@@ -10,11 +10,10 @@ import NotFound from '../components/NotFound';
 
 // Component để bảo vệ các route cần xác thực
 const PrivateRoute = ({ children }) => {
-    // Lấy trực tiếp isAuthenticated từ useAuth()
-    const { isAuthenticated } = useAuth(); 
+    const { isAuthenticated } = useAuth();
     
     // Nếu chưa đăng nhập, chuyển hướng đến /login
-    return isAuthenticated ? children : <Navigate to="/login" />;
+    return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
 const AppRoutes = () => {
@@ -32,12 +31,12 @@ const AppRoutes = () => {
                     path="/motorbikes" 
                     element={
                         <PrivateRoute>
-                            <MotorbikeList /> 
+                            <MotorbikeList />
                         </PrivateRoute>
                     } 
                 />
                 
-                {/* 4. Route chi tiết xe máy */}
+                {/* 4. Route xem chi tiết xe máy */}
                 <Route 
                     path="/view/:id" 
                     element={
@@ -57,7 +56,7 @@ const AppRoutes = () => {
                     } 
                 />
                 
-                {/* 6. Xử lý tất cả các đường dẫn không xác định: Chuyển hướng đến /motorbikes */}
+                {/* 6. Xử lý tất cả các đường dẫn không xác định: 404 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>

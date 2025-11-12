@@ -24,7 +24,7 @@
       "password": "123456",
       "fullName": "Nguyễn Văn Thanh",
       "role": "admin",
-      "status": "blocked",
+      "status": "active",
       "avatar": "/images/users/thanh123.png"
     },
     {
@@ -85,6 +85,14 @@
       "courseName": "Network Security",
       "amount": 3800000,
       "date": "2025-10-20"
+    },
+    {
+      "id": "4e3e",
+      "semester": "Spring 2026",
+      "courseName": "Cloud Computing",
+      "amount": 2000000,
+      "date": "2025-11-07",
+      "userId": "1"
     }
   ]
 }

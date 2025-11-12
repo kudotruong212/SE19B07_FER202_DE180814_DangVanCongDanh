@@ -6,8 +6,8 @@
       "model": "Liberty ABS",
       "year": 2020,
       "price": 1800,
-      "stock": 4,
-      "image": "https://via.placeholder.com/400x300?text=Piaggio+Liberty"
+      "stock": 1,
+      "image": "/images/motorbikes/piaggio-liberty.jpg"
     },
     {
       "id": "2",
@@ -15,8 +15,8 @@
       "model": "Exciter 155",
       "year": 2023,
       "price": 1700,
-      "stock": 6,
-      "image": "https://via.placeholder.com/400x300?text=Yamaha+Exciter"
+      "stock": 4,
+      "image": "/images/motorbikes/yamaha-exciter.jpg"
     },
     {
       "id": "3",
@@ -24,8 +24,8 @@
       "model": "Winner X",
       "year": 2022,
       "price": 1500,
-      "stock": 10,
-      "image": "https://via.placeholder.com/400x300?text=Honda+Winner"
+      "stock": 9,
+      "image": "/images/motorbikes/honda-winner.jpg"
     },
     {
       "id": "4",
@@ -33,8 +33,8 @@
       "model": "Raider R150",
       "year": 2021,
       "price": 1400,
-      "stock": 12,
-      "image": "https://via.placeholder.com/400x300?text=Suzuki+Raider"
+      "stock": 11,
+      "image": "/images/motorbikes/suzuki-raider.jpg"
     }
   ],
   "accounts": [

@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Sample Item 1",
+      "category": "Category A",
+      "price": 100,
+      "stock": 6,
+      "image": "/images/items/item1.jpg",
+      "description": "This is a sample item description."
+    },
+    {
+      "id": "2",
+      "name": "Sample Item 2",
+      "category": "Category B",
+      "price": 200,
+      "stock": 2,
+      "image": "/images/items/item2.jpg",
+      "description": "This is another sample item description."
+    },
+    {
+      "id": "3",
+      "name": "Sample Item 3",
+      "category": "Category A",
+      "price": 150,
+      "stock": 7,
+      "image": "/images/items/item3.jpg",
+      "description": "Yet another sample item description."
+    }
+  ],
+  "accounts": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "user123",
+      "role": "user"
+    }
+  ]
+}

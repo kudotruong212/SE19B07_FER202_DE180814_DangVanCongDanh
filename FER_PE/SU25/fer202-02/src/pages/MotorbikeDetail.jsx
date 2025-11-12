@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Button, Card, Badge, Row, Col } from 'react-bootstrap';
+import { Container, Button, Card, Badge, Row, Col, Spinner } from 'react-bootstrap';
 import { useMotorbikes } from '../contexts/MotorbikeContext';
 import { useCart } from '../contexts/CartContext';
-import * as motorbikeAPI from '../api/motorbikeAPI';
+import * as api from '../services/api';
 import NotFound from '../components/NotFound';
-import PropTypes from 'prop-types';
+import NavigationHeader from '../components/NavigationHeader';
 
 
 const MotorbikeDetail = () => {
@@ -20,7 +20,7 @@ const MotorbikeDetail = () => {
   useEffect(() => {
     const loadMotorbike = async () => {
       try {
-        const found = await motorbikeAPI.getMotorbikeById(id);
+        const found = await api.getMotorbikeById(id);
         setMotorbike(found);
       } catch (error) {
         setMotorbike(null);
@@ -40,11 +40,11 @@ const MotorbikeDetail = () => {
     try {
       addToCart(motorbike);
       const newStock = motorbike.stock - 1;
-      await motorbikeAPI.updateMotorbike(motorbike.id, {
+      await api.updateMotorbike(motorbike.id, {
         ...motorbike,
         stock: newStock
       });
-      updateMotorbikeStock(motorbike.id, newStock);
+      await updateMotorbikeStock(motorbike.id, newStock);
       setMotorbike({ ...motorbike, stock: newStock });
       alert(`${motorbike.model} has been added to your cart.`);
     } catch (error) {
@@ -54,9 +54,15 @@ const MotorbikeDetail = () => {
 
   if (loading) {
     return (
-      <Container className="mt-4">
-        <p>Loading...</p>
-      </Container>
+      <>
+        <NavigationHeader />
+        <Container className="mt-4">
+          <div className="text-center">
+            <Spinner animation="border" variant="primary" />
+            <p className="mt-3">Loading...</p>
+          </div>
+        </Container>
+      </>
     );
   }
 
@@ -65,7 +71,9 @@ const MotorbikeDetail = () => {
   }
 
   return (
-    <Container className="mt-4">
+    <>
+      <NavigationHeader />
+      <Container className="mt-4">
       <Button variant="secondary" onClick={() => navigate('/motorbikes')} className="mb-3">
         ← Back to List
       </Button>
@@ -76,11 +84,11 @@ const MotorbikeDetail = () => {
             <Col md={5}>
               <img
                 src={motorbike.image}
-                alt={motorbike.model}
+                alt={`${motorbike.brand} ${motorbike.model} - ${motorbike.year}`}
                 className="img-fluid w-100"
                 style={{ borderRadius: 8, objectFit: 'cover', maxHeight: '600px' }}
                 onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/400x600?text=No+Image';
+                  e.target.src = '/images/motorbikes/honda-winner.jpg';
                 }}
               />
             </Col>
@@ -113,17 +121,8 @@ const MotorbikeDetail = () => {
         </Card.Body>
       </Card>
     </Container>
+    </>
   );
-};
-
-MotorbikeDetail.propTypes = {
-  motorbikes: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  updateMotorbikeStock: PropTypes.func.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired,
-  successMessage: PropTypes.string.isRequired,
-  setSuccessMessage: PropTypes.func.isRequired
 };
 
 export default MotorbikeDetail;
